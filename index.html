@@ -7,7 +7,6 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Using Inter for the clean, tight-tracking aesthetic of Neue Montreal -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
@@ -24,7 +23,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Hide default cursor */
+            cursor: none;
         }
 
         html.lenis, html.lenis body {
@@ -244,6 +243,11 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* 
+           =============================================
+           THE HERO IMAGE CSS UPGRADE
+           =============================================
+        */
         .hero-image-wrapper {
             position: absolute;
             bottom: 0;
@@ -251,13 +255,20 @@
             transform: translateX(-50%);
             height: 85vh; 
             z-index: 2; 
-            pointer-events: none; 
         }
 
         .hero-img {
             height: 100%;
             width: auto;
             object-fit: cover;
+            /* Applies the professional high-contrast B&W editorial look */
+            filter: grayscale(100%) contrast(1.1) brightness(0.9);
+            transition: filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Smoothly reveals your natural color when hovered */
+        .hero-img:hover {
+            filter: grayscale(0%) contrast(1) brightness(1);
         }
 
         .container {
@@ -266,17 +277,73 @@
             padding: 0 5vw;
         }
 
+        /* 
+           =============================================
+           THE ASYMMETRICAL ABOUT SECTION (Grid & Scroll Reveal)
+           =============================================
+        */
         .about-section {
-            padding: 20vh 0;
+            padding: 25vh 0;
             background-color: var(--bg-white);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        @media (min-width: 900px) {
+            .about-section {
+                grid-template-columns: 1.5fr 3.5fr; /* The signature offset grid */
+                align-items: flex-end;
+            }
+        }
+
+        .about-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            margin-bottom: 30px;
         }
 
         .about-text {
             font-size: clamp(2rem, 3.5vw, 3.5rem);
             line-height: 1.3;
             letter-spacing: -1px;
-            max-width: 1100px;
             font-weight: 400;
+        }
+
+        /* Styling for the SplitType words */
+        .about-text .word {
+            opacity: 0.2; /* Words start dimmed */
+            will-change: opacity;
+            padding-right: 8px; /* Proper spacing between words */
+        }
+
+        .about-btn-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .about-circle-btn {
+            width: 150px;
+            height: 150px;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .about-circle-btn:hover {
+            background-color: var(--bg-white);
+            color: var(--bg-dark);
+            border-color: rgba(28, 29, 32, 0.2);
         }
 
         .work-section {
@@ -602,21 +669,28 @@
         </div>
 
         <div class="hero-image-wrapper">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" alt="Musthalif" class="hero-img">
+            <comment-tag id="1" text="Updated the image source to use the generated professional photo so you can preview it. When you upload your final, background-removed version to GitHub, simply change this back to 'profile-cutout.png'." type="suggestion"><img src="http://googleusercontent.com/image_generation_content/333" alt="Musthalif" class="hero-img hover-trigger"></comment-tag>
         </div>
     </section>
 
+    <!-- The Asymmetrical About Section -->
     <section class="about-section container" id="about-section">
-        <p class="about-text" id="about-text">
-            Helping enterprises secure their digital infrastructure. I specialize in migrating legacy networks, hardening devices, and automating security protocols to build resilient architectures.
-        </p>
+        <div class="about-label">
+            Helping enterprises secure<br>their digital infrastructure.
+        </div>
+        <div class="about-content">
+            <p class="about-text" id="about-text">
+                I specialize in migrating legacy networks, hardening devices, and automating security protocols to build resilient architectures.
+            </p>
+            <div class="about-btn-wrapper hover-trigger">
+                <a href="#contact" class="about-circle-btn magnetic-btn">About me</a>
+            </div>
+        </div>
     </section>
 
-    <!-- Work Section with Professional HTML Descriptions -->
     <section class="work-section container" id="work">
         <div class="work-header">Recent Work</div>
         
-        <!-- Project 1 -->
         <div class="work-item hover-project" 
              data-title="Palo Alto HA" 
              data-context="Migration" 
@@ -626,7 +700,6 @@
             <div class="work-meta">Migration</div>
         </div>
 
-        <!-- Project 2 -->
         <div class="work-item hover-project" 
              data-title="Prisma Access" 
              data-context="Management" 
@@ -636,7 +709,6 @@
             <div class="work-meta">Management</div>
         </div>
 
-        <!-- Project 3 -->
         <div class="work-item hover-project"
              data-title="Device Hardening" 
              data-context="Security" 
@@ -646,9 +718,7 @@
             <div class="work-meta">Security</div>
         </div>
         
-        <!-- HIDDEN PROJECTS CONTAINER -->
         <div id="hidden-projects" class="hidden-projects-container">
-             <!-- Project 4 -->
             <div class="work-item hover-project"
                  data-title="Firewall Review" 
                  data-context="Quarterly" 
@@ -658,7 +728,6 @@
                 <div class="work-meta">Quarterly</div>
             </div>
 
-             <!-- Project 5 -->
             <div class="work-item hover-project"
                  data-title="Automating Devices" 
                  data-context="Infrastructure" 
@@ -677,7 +746,7 @@
     <section class="footer" id="contact">
         <div class="footer-top">
             <div class="footer-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Profile" class="footer-profile-img">
+                <comment-tag id="2" text="Updated the footer circle image source so everything matches perfectly." type="suggestion"><img src="http://googleusercontent.com/image_generation_content/333" alt="Profile" class="footer-profile-img"></comment-tag>
             </div>
             <h2 class="footer-title">Let's work<br>together</h2>
         </div>
@@ -692,15 +761,15 @@
                 <a href="#" class="hover-trigger">+91 98765 43210</a>
             </div>
             <div class="footer-links">
-                <a href="https://www.linkedin.com/in/musthalif-meeran-61104b1b8//" target="_blank" rel="noopener noreferrer" class="hover-trigger">LinkedIn</a>
-                <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" class="hover-trigger">GitHub</a>
+                <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" class="hover-trigger">LinkedIn</a>
+                <a href="https://github.com/Muchu97" target="_blank" rel="noopener noreferrer" class="hover-trigger">GitHub</a>
                 <a href="Musthalif_Meeran_Resume.pdf" download="Musthalif_Meeran_Resume.pdf" class="hover-trigger">Resume</a>
             </div>
         </div>
     </section>
 
     <!-- Case Study Modal -->
-    <div class="project-modal" id="project-modal">
+    <div class="project-modal" id="project-modal" data-lenis-prevent>
         <button class="modal-back-btn magnetic-btn hover-trigger" id="modal-close">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -719,7 +788,6 @@
                 <p>2023 - 2024</p>
             </div>
             <div>
-                <!-- Changed to handle HTML injection -->
                 <p class="modal-description" id="modal-desc"></p>
                 <div class="modal-image-placeholder" id="modal-image-full"></div>
             </div>
@@ -730,11 +798,15 @@
         </div>
     </div>
 
+    <!-- GSAP, ScrollTrigger, SplitType, and Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 
     <script>
-        // 1. Lenis Smooth Scroll
+        gsap.registerPlugin(ScrollTrigger);
+
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -747,13 +819,11 @@
         }
         requestAnimationFrame(raf);
 
-        // Keep scroll size updated to fix footer cutoff
         const resizeObserver = new ResizeObserver(() => {
             requestAnimationFrame(() => lenis.resize());
         });
         resizeObserver.observe(document.body);
 
-        // 2. Custom Cursor
         const cursor = document.querySelector('.cursor');
         const triggers = document.querySelectorAll('.hover-trigger');
         const projectTriggers = document.querySelectorAll('.hover-project');
@@ -772,7 +842,6 @@
             trigger.addEventListener('mouseleave', () => cursor.classList.remove('active'));
         });
 
-        // 3. Dennis Hover Reveal (Fixed coordinates)
         const hoverReveal = document.getElementById('hover-reveal');
         const hoverImage = document.getElementById('hover-image');
         
@@ -797,7 +866,6 @@
             });
         });
 
-        // 4. Case Study Modal Logic
         const modal = document.getElementById('project-modal');
         const modalCloseBtn = document.getElementById('modal-close');
         const modalFooterClose = document.getElementById('modal-footer-close');
@@ -805,17 +873,13 @@
         projectTriggers.forEach(project => {
             project.addEventListener('click', (e) => {
                 e.preventDefault();
-                lenis.stop();
                 
                 cursor.classList.remove('view-project');
                 gsap.to(hoverReveal, { opacity: 0, scale: 0.8, duration: 0.2 });
 
                 document.getElementById('modal-title').innerText = project.getAttribute('data-title');
                 document.getElementById('modal-context').innerText = project.getAttribute('data-context');
-                
-                // IMPORTANT: Use innerHTML to parse the professional bold/line breaks
                 document.getElementById('modal-desc').innerHTML = project.getAttribute('data-desc');
-                
                 document.getElementById('modal-image-full').style.backgroundImage = `url('${project.getAttribute('data-image')}')`;
 
                 gsap.to(modal, { top: 0, duration: 0.8, ease: "power4.inOut" });
@@ -828,22 +892,20 @@
             gsap.to(modal, {
                 top: "100vh",
                 duration: 0.8,
-                ease: "power4.inOut",
-                onComplete: () => lenis.start()
+                ease: "power4.inOut"
             });
         }
 
         modalCloseBtn.addEventListener('click', closeModal);
         modalFooterClose.addEventListener('click', closeModal);
 
-        document.querySelectorAll('.hero-nav a').forEach(link => {
+        document.querySelectorAll('.hero-nav a, .about-circle-btn').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 lenis.scrollTo(link.getAttribute('href'));
             });
         });
 
-        // 5. Magnetic Buttons
         const magneticBtns = document.querySelectorAll('.magnetic-btn');
         magneticBtns.forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
@@ -864,7 +926,6 @@
             });
         });
 
-        // 6. View More Cascade & Auto-Collapse
         const viewMoreBtn = document.getElementById('view-more-btn');
         const hiddenProjects = document.getElementById('hidden-projects');
         const workSection = document.getElementById('work');
@@ -896,48 +957,41 @@
                     duration: 0.8,
                     stagger: 0.15,
                     ease: "power3.out",
-                    onComplete: () => lenis.resize() // Ensure scroll length updates
+                    onComplete: () => lenis.resize()
                 });
             });
 
-            // Auto-collapse when mouse leaves the work section
             workSection.addEventListener('mouseleave', () => {
                 if (!isExpanded) return;
                 isExpanded = false;
 
-                // Animate items away
-                gsap.to(hiddenItems, {
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.4,
-                    ease: "power2.in"
-                });
+                gsap.to(hiddenItems, { opacity: 0, y: 30, duration: 0.4, ease: "power2.in" });
 
-                // Animate container closed
                 gsap.to(hiddenProjects, { 
-                    height: 0, 
-                    opacity: 0, 
-                    duration: 0.5, 
-                    delay: 0.2,
-                    ease: "power3.inOut",
-                    onComplete: () => {
-                        hiddenProjects.style.pointerEvents = 'none';
-                        lenis.resize();
-                    }
+                    height: 0, opacity: 0, duration: 0.5, delay: 0.2, ease: "power3.inOut",
+                    onComplete: () => { hiddenProjects.style.pointerEvents = 'none'; lenis.resize(); }
                 });
 
-                // Bring back the view more button
                 viewMoreWrapper.style.display = 'flex';
-                gsap.to(viewMoreWrapper, {
-                    height: 'auto', 
-                    opacity: 1, 
-                    duration: 0.5,
-                    delay: 0.4,
-                    ease: "power3.out",
-                    onComplete: () => lenis.resize()
-                });
+                gsap.to(viewMoreWrapper, { height: 'auto', opacity: 1, duration: 0.5, delay: 0.4, ease: "power3.out", onComplete: () => lenis.resize() });
             });
         }
+
+        // ==========================================
+        // TEXT SCRUB ANIMATION
+        // ==========================================
+        const textToAnimate = new SplitType('#about-text', { types: 'words' });
+
+        gsap.to(textToAnimate.words, {
+            opacity: 1,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: '#about-section',
+                start: 'top 70%', // Start animating when section hits 70% of viewport
+                end: 'bottom 80%', // Finish when it hits 80%
+                scrub: true,       // Ties the animation directly to the scrollbar
+            }
+        });
     </script>
 </body>
 </html>
