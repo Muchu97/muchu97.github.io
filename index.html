@@ -255,6 +255,27 @@
         .archive-table td:first-child { font-size: 2.5rem; letter-spacing: -1px; }
         .archive-table tr:hover td { background-color: rgba(0,0,0,0.03); }
 
+        /* 🟢 AWWWARDS PAGE CSS 🟢 */
+        .awwwards-page {
+            position: fixed; top: 100vh; left: 0; width: 100vw; height: 100vh;
+            background-color: var(--bg-dark); color: var(--text-light);
+            z-index: 999998; overflow-y: auto; padding: 0 5vw;
+        }
+        .awwwards-page .archive-nav { border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .awwwards-page .archive-close { color: var(--text-light); }
+        .awwwards-page .archive-header { color: var(--text-light); margin-bottom: 5vh; }
+        .awwwards-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 15vh; }
+        @media (min-width: 768px) { .awwwards-grid { grid-template-columns: 1fr 1fr; } }
+        .awwwards-card { border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 40px; transition: transform 0.3s, background-color 0.3s; }
+        .awwwards-card:hover { background-color: rgba(255,255,255,0.05); transform: translateY(-10px); }
+        .awwwards-badge { font-weight: 600; font-size: 1.5rem; margin-bottom: 20px; color: #455CE9; }
+        .awwwards-card h2 { font-size: 2.5rem; font-weight: 400; letter-spacing: -1px; margin-bottom: 10px; }
+        .awwwards-card p { font-size: 1.1rem; color: rgba(255,255,255,0.6); margin-bottom: 30px; }
+        .awwwards-date { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .awwwards-scores { display: flex; gap: 30px; flex-wrap: wrap; }
+        .score { font-size: 1.5rem; font-weight: 500; }
+        .score span { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); font-weight: 400; margin-bottom: 5px; }
+
         /* FOOTER */
         .footer { background-color: var(--bg-dark); color: var(--text-light); padding: 15vh 5vw 5vh 5vw; position: relative; overflow: hidden; display: flex; flex-direction: column; }
         .footer-top { display: flex; align-items: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; }
@@ -299,8 +320,9 @@
         .floating-menu-btn.is-open .burger-line:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
         .menu-overlay {
-            position: fixed; top: 0; left: 100%; width: 100vw; height: 100vh; background-color: var(--bg-dark);
+            position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; background-color: var(--bg-dark);
             z-index: 99998; display: flex; align-items: center; justify-content: center;
+            transform: translateX(100%); /* Start hidden off-screen to the right */
         }
         @media (min-width: 900px) { .menu-overlay { width: 500px; } }
 
@@ -353,7 +375,7 @@
             <div class="menu-socials-container">
                 <div class="menu-header" style="margin-bottom: 20px;">Socials</div>
                 <div class="menu-socials">
-                    <a href="#" class="hover-trigger">Awwwards</a>
+                    <a href="#awwwards" class="awwwards-link hover-trigger">Awwwards</a>
                     <a href="#" class="hover-trigger">Instagram</a>
                     <a href="#" class="hover-trigger">Twitter</a>
                     <a href="#" class="hover-trigger">LinkedIn</a>
@@ -403,6 +425,43 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <!-- 🟢 NEW AWWWARDS PAGE 🟢 -->
+    <div class="awwwards-page" id="awwwards-page" data-lenis-prevent>
+        <div class="archive-nav">
+            <div class="brand-logo" style="position: static; color: var(--text-light);">© Code by Musthalif</div>
+            <button class="archive-close hover-trigger" id="awwwards-close-btn">Close ✕</button>
+        </div>
+        <h1 class="archive-header">Recognitions & Awards</h1>
+        
+        <div class="awwwards-grid container">
+            <div class="awwwards-card hover-trigger">
+                <div class="awwwards-badge">Awwwards.</div>
+                <h2>Site of the Day</h2>
+                <p>Musthalif Meeran Portfolio</p>
+                <div class="awwwards-date">July 12, 2026</div>
+                <div class="awwwards-scores">
+                    <div class="score"><span>Design</span> 8.5</div>
+                    <div class="score"><span>Usability</span> 9.0</div>
+                    <div class="score"><span>Creativity</span> 8.2</div>
+                    <div class="score"><span>Content</span> 8.8</div>
+                </div>
+            </div>
+
+            <div class="awwwards-card hover-trigger">
+                <div class="awwwards-badge" style="color: rgba(255,255,255,0.8);">Awwwards.</div>
+                <h2>Honorable Mention</h2>
+                <p>Enterprise Network Security App</p>
+                <div class="awwwards-date">March 15, 2025</div>
+                <div class="awwwards-scores">
+                    <div class="score"><span>Design</span> 7.8</div>
+                    <div class="score"><span>Usability</span> 8.5</div>
+                    <div class="score"><span>Creativity</span> 7.5</div>
+                    <div class="score"><span>Content</span> 8.0</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- HOVER REVEAL -->
@@ -552,7 +611,7 @@
             <div class="footer-col" style="justify-self: md-end;">
                 <h5>Socials</h5>
                 <div class="footer-socials">
-                    <a href="#" class="hover-trigger">Awwwards</a>
+                    <a href="#awwwards" class="awwwards-link hover-trigger">Awwwards</a>
                     <a href="#" class="hover-trigger">Instagram</a>
                     <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" class="hover-trigger">LinkedIn</a>
                     <a href="https://github.com/Muchu97" target="_blank" rel="noopener noreferrer" class="hover-trigger">GitHub</a>
@@ -718,11 +777,13 @@
         if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
         if (modalFooterClose) modalFooterClose.addEventListener('click', closeModal);
 
-        // 4. PAGE TRANSITION & ARCHIVE ROUTING
+        // 4. PAGE TRANSITION & ROUTING
         const transitionScreen = document.getElementById('page-transition');
         const transitionText = document.getElementById('page-transition-text');
         const archivePage = document.getElementById('archive-page');
         const archiveCloseBtn = document.getElementById('archive-close-btn');
+        const awwwardsPage = document.getElementById('awwwards-page');
+        const awwwardsCloseBtn = document.getElementById('awwwards-close-btn');
 
         function triggerTransition(text, callback) {
             transitionText.innerText = text;
@@ -740,6 +801,29 @@
                         onComplete: () => gsap.set(transitionScreen, { top: "100vh" })
                     });
                 }
+            });
+        }
+
+        // Handle Awwwards Overlay
+        document.querySelectorAll('.awwwards-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (typeof toggleMenu === 'function' && isMenuOpen) toggleMenu(); // Close side menu
+                triggerTransition('Awwwards', () => {
+                    if (archivePage) gsap.set(archivePage, { top: "100vh" });
+                    gsap.set(awwwardsPage, { top: 0 });
+                    awwwardsPage.scrollTop = 0;
+                });
+            });
+        });
+
+        if (awwwardsCloseBtn) {
+            awwwardsCloseBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                triggerTransition('Home', () => {
+                    gsap.set(awwwardsPage, { top: "100vh" });
+                    lenis.scrollTo('#home', { immediate: true });
+                });
             });
         }
 
@@ -765,9 +849,9 @@
             scale: 1,
             ease: "power3.out",
             scrollTrigger: {
-                trigger: '#about-section', // Appears when the About section hits the bottom of screen
+                trigger: '#about-section', 
                 start: "top 80%", 
-                toggleActions: "play none none reverse" // Appears going down, hides going back up to Hero
+                toggleActions: "play none none reverse" 
             }
         });
 
@@ -777,12 +861,12 @@
             if (isMenuOpen) {
                 // Open Menu
                 menuBtn.classList.add('is-open');
-                gsap.to(menuOverlay, { x: "-100%", duration: 0.8, ease: "power4.inOut" });
+                gsap.to(menuOverlay, { transform: "translateX(0%)", duration: 0.8, ease: "power4.inOut" });
                 lenis.stop(); // Stop background scrolling
             } else {
                 // Close Menu
                 menuBtn.classList.remove('is-open');
-                gsap.to(menuOverlay, { x: "0%", duration: 0.8, ease: "power4.inOut" });
+                gsap.to(menuOverlay, { transform: "translateX(100%)", duration: 0.8, ease: "power4.inOut" });
                 lenis.start(); // Resume background scrolling
             }
         }
@@ -801,10 +885,12 @@
 
                 triggerTransition(link.innerText, () => {
                     if (targetId === '#work' && archivePage) {
-                        gsap.set(archivePage, { top: 0 }); // Show Archive if Work
+                        gsap.set(awwwardsPage, { top: "100vh" });
+                        gsap.set(archivePage, { top: 0 }); 
                         archivePage.scrollTop = 0;
                     } else {
-                        if(archivePage) gsap.set(archivePage, { top: "100vh" }); // Hide Archive for other pages
+                        if(archivePage) gsap.set(archivePage, { top: "100vh" }); 
+                        if(awwwardsPage) gsap.set(awwwardsPage, { top: "100vh" });
                         lenis.scrollTo(targetId, { immediate: true });
                     }
                 });
