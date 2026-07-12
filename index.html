@@ -908,38 +908,30 @@
             smoothWheel: true
         });
 
-         // 🟢 PRELOADER JAVASCRIPT LOGIC START 🟢
-        const greetings = [
-            "Hello", "Bonjour", "Ciao", "Hola", "Guten Tag", "Hallo", "Namaste", "Konnichiwa"
-        ];
-        const preloaderText = document.getElementById('preloader-text');
+       const greetings = ["Hello", "Bonjour", "Hola", "Ciao", "Namaste", "Guten tag", "こんにちは"];
+        const loaderText = document.getElementById('loader-text');
         const preloader = document.getElementById('preloader');
         
-        let greetingIndex = 0;
-        
-        lenis.stop();
-        document.body.style.overflow = 'hidden';
-
-        const greetingInterval = setInterval(() => {
-            greetingIndex++;
-            if (greetingIndex < greetings.length) {
-                preloaderText.innerText = greetings[greetingIndex];
+        let counter = 0;
+        const interval = setInterval(() => {
+            counter++;
+            if (counter < greetings.length) {
+                loaderText.innerText = greetings[counter];
             } else {
-                clearInterval(greetingInterval);
-                
+                clearInterval(interval);
+                // 🟢 Added delay and increased duration for the exact "Snellenberg" heavy slide effect
                 gsap.to(preloader, {
                     yPercent: -100,
-                    duration: 0.8,
+                    duration: 1.2,
                     ease: "power4.inOut",
-                    delay: 0.2,
+                    delay: 0.3,
                     onComplete: () => {
-                        document.body.style.overflow = '';
-                        lenis.start();
+                        document.body.style.overflow = 'auto'; // Unlock scroll
                     }
                 });
             }
-        }, 180);
-        // 🔴 PRELOADER JAVASCRIPT LOGIC END 🔴
+        }, 250); /* 🟢 Changed from 180 to 250 to slow down the text flashing */
+
 
 
         function raf(time) {
