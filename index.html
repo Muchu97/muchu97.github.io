@@ -92,6 +92,41 @@
             font-size: 14px;
             font-weight: 500;
         }
+         /* 🟢 PRELOADER CSS START 🟢 */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: clamp(2rem, 3.5vw, 4rem);
+            font-weight: 400;
+        }
+
+        .preloader-text {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 1;
+        }
+
+        /* The little dot next to the greeting */
+        .preloader-text::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: var(--text-light);
+            border-radius: 50%;
+        }
+        /* 🔴 PRELOADER CSS END 🔴 */
+
 
         .hero {
             position: relative;
@@ -676,6 +711,12 @@
     </style>
 </head>
 <body>
+     <!-- 🟢 PRELOADER HTML START 🟢 -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-text" id="preloader-text">Hello</div>
+    </div>
+    <!-- 🔴 PRELOADER HTML END 🔴 -->
+
 
     <div class="cursor"></div>
 
@@ -866,6 +907,40 @@
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true
         });
+
+         // 🟢 PRELOADER JAVASCRIPT LOGIC START 🟢
+        const greetings = [
+            "Hello", "Bonjour", "Ciao", "Hola", "Guten Tag", "Hallo", "Namaste", "Konnichiwa"
+        ];
+        const preloaderText = document.getElementById('preloader-text');
+        const preloader = document.getElementById('preloader');
+        
+        let greetingIndex = 0;
+        
+        lenis.stop();
+        document.body.style.overflow = 'hidden';
+
+        const greetingInterval = setInterval(() => {
+            greetingIndex++;
+            if (greetingIndex < greetings.length) {
+                preloaderText.innerText = greetings[greetingIndex];
+            } else {
+                clearInterval(greetingInterval);
+                
+                gsap.to(preloader, {
+                    yPercent: -100,
+                    duration: 0.8,
+                    ease: "power4.inOut",
+                    delay: 0.2,
+                    onComplete: () => {
+                        document.body.style.overflow = '';
+                        lenis.start();
+                    }
+                });
+            }
+        }, 180);
+        // 🔴 PRELOADER JAVASCRIPT LOGIC END 🔴
+
 
         function raf(time) {
             lenis.raf(time);
