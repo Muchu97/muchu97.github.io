@@ -257,10 +257,10 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* 🟢🟢🟢 LOOK HERE: START OF HERO IMAGE HOVER EFFECT 🟢🟢🟢 */
+         /* 🟢🟢🟢 LOOK HERE: START OF HERO IMAGE HOVER EFFECT 🟢🟢🟢 */
         /* 
            =============================================
-           THE HERO IMAGE CSS UPGRADE (NETWORK VIBE)
+           THE CYBER GLITCH DECRYPT REVEAL (SECURITY VIBE)
            =============================================
         */
         .hero-image-wrapper {
@@ -279,45 +279,48 @@
             /* Applies the professional high-contrast B&W editorial look */
             filter: grayscale(100%) contrast(1.1) brightness(0.9);
             transform-origin: bottom center;
+            /* The transition handles the smooth fade out when you move the mouse AWAY */
             transition: filter 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* 1. The Cyber/Firewall Scanline Overlay */
-        .hero-image-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: #00ffcc; /* CHANGE THIS HEX CODE TO CHANGE LASER COLOR! */
-            box-shadow: 0 0 15px 4px rgba(0, 255, 204, 0.5), 
-                        0 0 40px 15px rgba(0, 255, 204, 0.2);
-            opacity: 0;
-            pointer-events: none;
-            z-index: 5;
-            border-radius: 50%;
-            transition: opacity 0.3s;
-        }
-
-        /* 2. Hover State triggers color, a 3D pop, and the scanner */
+        /* 1. Trigger the Glitch Animation on Hover */
         .hero-image-wrapper:hover .hero-img {
-            filter: grayscale(0%) contrast(1.05) brightness(1.05);
-            transform: scale(1.02); /* Slight 3D pop forward */
+            /* The image stays in this final state after the animation finishes */
+            filter: grayscale(0%) contrast(1.05) brightness(1.05) drop-shadow(0 0 30px rgba(0, 255, 204, 0.2));
+            transform: scale(1.03); 
+            animation: cyberGlitchDecrypt 0.4s ease-out forwards;
         }
 
-        .hero-image-wrapper:hover::after {
-            opacity: 1;
-            animation: deepPacketScan 2.5s ease-in-out infinite;
-        }
-
-        /* 3. The scanline physics */
-        @keyframes deepPacketScan {
-            0% { top: 2%; opacity: 0; }
-            10% { opacity: 1; }
-            50% { top: 98%; }
-            90% { opacity: 1; }
-            100% { top: 2%; opacity: 0; }
+        /* 2. The Cyber Security Decryption Glitch Physics */
+        @keyframes cyberGlitchDecrypt {
+            0% { 
+                filter: grayscale(100%); 
+                transform: scale(1) translateX(0); 
+            }
+            15% { 
+                /* Extreme RGB split and skew */
+                filter: grayscale(80%) drop-shadow(15px 0 0 rgba(0,255,255,0.8)) drop-shadow(-15px 0 0 rgba(255,0,50,0.8)) hue-rotate(90deg); 
+                transform: scale(1.01) translateX(-8px) skewX(-3deg); 
+            }
+            30% { 
+                /* Reverse the split, add an invert flash */
+                filter: grayscale(60%) drop-shadow(-15px 0 0 rgba(0,255,255,0.6)) drop-shadow(15px 0 0 rgba(255,0,50,0.6)) invert(15%); 
+                transform: scale(1.015) translateX(8px) skewX(3deg); 
+            }
+            45% { 
+                /* Blur and settle */
+                filter: grayscale(30%) blur(2px); 
+                transform: scale(1.02) translateX(-4px) skewX(0deg); 
+            }
+            60% { 
+                filter: grayscale(10%) drop-shadow(5px 0 0 rgba(0,255,255,0.4)); 
+                transform: scale(1.025) translateX(4px); 
+            }
+            100% { 
+                /* Final clean state with a subtle cyber-glow behind you */
+                filter: grayscale(0%) contrast(1.05) brightness(1.05) drop-shadow(0 0 30px rgba(0, 255, 204, 0.2)); 
+                transform: scale(1.03) translateX(0); 
+            }
         }
         /* 🔴🔴🔴 END OF HERO IMAGE HOVER EFFECT 🔴🔴🔴 */
 
