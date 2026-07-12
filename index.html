@@ -93,7 +93,7 @@
             content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
             background-color: var(--blue-accent); z-index: -1; transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .contact-pill::before, .view-more-btn::before, .modal-back-btn::before { border-radius: 50px; }
+        .contact-pill::before, .modal-back-btn::before { border-radius: 50px; }
         .about-circle-btn::before, .footer-blue-btn::before { border-radius: 50%; }
         
         .magnetic-btn:hover::before { height: 100%; }
@@ -173,33 +173,21 @@
         }
         @media (min-width: 900px) {
             .about-section { 
-                grid-template-columns: 1.6fr 1fr; /* Large left column, smaller right column */
+                grid-template-columns: 1.6fr 1fr; 
                 align-items: flex-start; 
                 gap: 100px;
             }
         }
-        .about-left-col {
-            padding-right: 2vw;
-        }
-        .about-right-col {
-            display: flex;
-            flex-direction: column;
-            gap: 60px; /* Exact spacing between small text and button */
-        }
+        .about-left-col { padding-right: 2vw; }
+        .about-right-col { display: flex; flex-direction: column; gap: 60px; }
         .about-text {
-            font-size: clamp(2rem, 3.2vw, 3.5rem); 
-            line-height: 1.35;
-            letter-spacing: -1px; 
-            font-weight: 400; 
-            max-width: 900px;
+            font-size: clamp(2rem, 3.2vw, 3.5rem); line-height: 1.35;
+            letter-spacing: -1px; font-weight: 400; max-width: 900px;
         }
         .about-text .word { opacity: 0.2; will-change: opacity; padding-right: 8px; }
         
         .about-subtext {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--text-dark);
-            max-width: 350px;
+            font-size: 1.1rem; line-height: 1.6; color: var(--text-dark); max-width: 350px;
         }
         .about-btn-wrapper { display: flex; align-items: flex-start; }
         .about-circle-btn {
@@ -229,29 +217,24 @@
         .view-more-wrapper { display: flex; justify-content: center; margin-top: 8vh; padding-bottom: 5vh; }
         
         .view-more-btn {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-            border: 1px solid rgba(28, 29, 32, 0.2); 
-            padding: 16px 40px; 
-            border-radius: 50px; 
-            font-size: 1.1rem; 
-            font-weight: 500; 
-            cursor: pointer; 
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 6px;
+            background-color: var(--bg-white); color: var(--text-dark); border: 1px solid rgba(28, 29, 32, 0.2); 
+            padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 500; cursor: pointer; 
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            transition: color 0.3s, border-color 0.3s, background-color 0.4s;
+            position: relative; overflow: hidden;
         }
+        .view-more-btn::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
+            background-color: var(--blue-accent); z-index: -1; transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border-radius: 50px;
+        }
+        .view-more-btn:hover::before { height: 100%; }
+        .view-more-btn:hover { color: var(--text-light); border-color: transparent; }
+        
         .view-more-btn span {
-            font-size: 0.75rem; 
-            transform: translateY(-8px); 
-            font-weight: 500; 
-            color: rgba(28, 29, 32, 0.6); 
-            transition: color 0.3s;
+            font-size: 0.75rem; transform: translateY(-8px); font-weight: 500; color: rgba(28, 29, 32, 0.6); transition: color 0.3s;
         }
-        .view-more-btn:hover span {
-            color: var(--text-light); /* turns white on blue hover fill */
-        }
+        .view-more-btn:hover span { color: var(--text-light); }
 
         /* COUNTER-SCALE PHYSICS HOVER REVEAL */
         .hover-reveal { position: fixed; width: 400px; height: 260px; top: 0; left: 0; pointer-events: none; opacity: 0; transform: scale(0.8); z-index: 100; overflow: hidden; }
@@ -315,10 +298,10 @@
         /* FOOTER CURVE */
         .footer-curve-wrapper {
             width: 100vw;
-            height: 10vh; /* Dynamic scalable height */
-            min-height: 50px;
+            height: 15vh;
+            min-height: 80px;
             background-color: var(--bg-white);
-            margin-bottom: -2px; /* Pulls it flush with footer to prevent rendering gaps */
+            margin-bottom: -2px;
             position: relative;
             z-index: 10;
         }
@@ -330,7 +313,8 @@
 
         /* FOOTER */
         .footer { background-color: var(--bg-dark); color: var(--text-light); position: relative; overflow: hidden; }
-        .footer-inner { padding: 10vh 5vw 5vh 5vw; display: flex; flex-direction: column; height: 100%; }
+        .footer-inner { padding: 5vh 5vw 5vh 5vw; display: flex; flex-direction: column; height: 100%; }
+        
         .footer-top { display: flex; align-items: flex-start; margin-bottom: 50px; flex-direction: column; }
         .footer-title-line { display: flex; align-items: center; gap: 20px; }
         .footer-title { font-size: clamp(3.5rem, 8vw, 8rem); font-weight: 400; letter-spacing: -2px; line-height: 1.1; display: block; }
@@ -570,7 +554,6 @@
 
     <!-- ABOUT SECTION -->
     <section class="about-section container" id="about-section">
-        
         <!-- Left Column: Giant Text -->
         <div class="about-left-col">
             <p class="about-text" id="about-text">
@@ -587,7 +570,6 @@
                 <a href="#contact" class="about-circle-btn magnetic-btn">About me</a>
             </div>
         </div>
-        
     </section>
 
     <!-- WORK SECTION -->
@@ -642,14 +624,16 @@
         </div>
 
         <div class="view-more-wrapper">
-            <button id="view-more-btn" class="magnetic-btn view-more-btn hover-trigger">More work <span>2</span></button>
+            <div id="view-more-btn" class="view-more-btn hover-trigger magnetic-btn">
+                More work <span>2</span>
+            </div>
         </div>
     </section>
 
     <!-- DYNAMIC SVG FOOTER CURVE -->
     <div class="footer-curve-wrapper">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path id="footer-curve" d="M 0 100 Q 50 0 100 100 Z" fill="#1C1D20"></path>
+            <path id="footer-curve" d="M 0 100 C 20 0 80 0 100 100 Z" fill="#1C1D20"></path>
         </svg>
     </div>
 
@@ -786,7 +770,7 @@
         });
         resizeObserver.observe(document.body);
 
-        // 2. CURSOR & HOVER REVEAL LOGIC (Dennis Snellenberg Buttery Counter-Scale)
+        // 2. CURSOR & HOVER REVEAL LOGIC
         const cursor = document.querySelector('.cursor');
         const triggers = document.querySelectorAll('.hover-trigger');
         const projectTriggers = document.querySelectorAll('.hover-project');
@@ -808,7 +792,6 @@
         const hoverReveal = document.getElementById('hover-reveal');
         const hoverImage = document.getElementById('hover-image');
         
-        // 🟢 Buttery quickTo mapping for extreme smoothness
         const xTo = gsap.quickTo(hoverReveal, "x", {duration: 0.7, ease: "power4.out"});
         const yTo = gsap.quickTo(hoverReveal, "y", {duration: 0.7, ease: "power4.out"});
 
@@ -822,7 +805,6 @@
                 cursor.classList.add('view-project');
                 hoverImage.src = project.getAttribute('data-image');
                 
-                // 🟢 Counter-scaling: Container scales up to 1, Image scales down to 1
                 gsap.to(hoverReveal, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" });
                 gsap.to(hoverImage, { scale: 1, duration: 0.6, ease: "expo.out" });
             });
@@ -830,7 +812,6 @@
             project.addEventListener('mouseleave', () => {
                 cursor.classList.remove('view-project');
                 
-                // 🟢 Counter-scaling: Container shrinks, Image blows up
                 gsap.to(hoverReveal, { opacity: 0, scale: 0.8, duration: 0.4, ease: "power3.inOut" });
                 gsap.to(hoverImage, { scale: 1.3, duration: 0.4, ease: "power3.inOut" });
             });
@@ -1020,23 +1001,21 @@
             const viewMoreWrapper = viewMoreBtn.parentElement;
             const hiddenItems = hiddenProjects.querySelectorAll('.work-item');
 
-            // Function to reset the section to its default hidden state
             const resetProjects = () => {
                 if (!isExpanded) return;
                 isExpanded = false;
-                viewMoreWrapper.style.display = "flex"; // Bring button back
+                viewMoreWrapper.style.display = "flex"; 
                 gsap.set(viewMoreWrapper, { height: "auto", opacity: 1 });
                 gsap.set(hiddenProjects, { height: 0, opacity: 0, pointerEvents: "none" });
                 gsap.set(hiddenItems, { opacity: 0, y: 30 });
             };
 
-            // Expand when clicked
             viewMoreBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (isExpanded) return;
                 isExpanded = true;
                 
-                viewMoreWrapper.style.display = "none"; // Hide button instantly
+                viewMoreWrapper.style.display = "none"; 
                 
                 gsap.set(hiddenProjects, { height: "auto", opacity: 1, overflow: "visible", pointerEvents: "auto" });
                 gsap.fromTo(hiddenItems, 
@@ -1045,13 +1024,12 @@
                 );
             });
 
-            // ScrollTrigger Watcher: Reset when the #work section leaves the screen
             ScrollTrigger.create({
                 trigger: '#work',
                 start: "top bottom",
                 end: "bottom top",
-                onLeave: () => resetProjects(),      // Triggered when scrolling completely past it downwards
-                onLeaveBack: () => resetProjects()   // Triggered when scrolling completely past it upwards
+                onLeave: () => resetProjects(),      
+                onLeaveBack: () => resetProjects()   
             });
         }
 
@@ -1067,35 +1045,22 @@
             });
         }
 
-        // FOOTER PARALLAX EFFECT
-        gsap.from(".footer-inner", {
-            yPercent: -30,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".footer",
-                start: "top bottom",
-                end: "bottom bottom",
-                scrub: true
-            }
-        });
-
-        // FOOTER SVG ARCH ANIMATION
+        // 9. FOOTER SVG ARCH ANIMATION (Cleaned Up to flatten beautifully)
         const footerCurve = document.getElementById('footer-curve');
         if (footerCurve) {
             gsap.to(footerCurve, {
-                // Dynamically changes the SVG path to flatten out perfectly straight
-                attr: { d: "M 0 100 Q 50 100 100 100 Z" },
+                attr: { d: "M 0 100 C 20 100 80 100 100 100 Z" },
                 ease: "none",
                 scrollTrigger: {
-                    trigger: ".footer-curve-wrapper",
-                    start: "top bottom",   // Start flattening when curve enters bottom of screen
-                    end: "bottom top",     // Finish flattening when curve reaches top of screen
-                    scrub: true            // Ties the animation directly to scroll speed
+                    trigger: ".footer",  // Trigger on the footer itself!
+                    start: "top bottom", // Start flattening as soon as the footer enters the screen
+                    end: "top 30%",      // Completely flat by the time the footer is pulled up the screen
+                    scrub: 1             // Smooth interpolation
                 }
             });
         }
 
-        // 9. DYNAMIC LOCAL TIME (INDIA)
+        // 10. DYNAMIC LOCAL TIME (INDIA)
         function updateLocalTime() {
             const timeEl = document.getElementById('local-time');
             if (timeEl) {
