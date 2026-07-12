@@ -192,10 +192,19 @@
         .role-description {
             position: absolute;
             top: 45%;
-            right: 5%;
+            /* 🟢 Changed from right: 5% to anchor it right next to the center image */
+            left: calc(50% + 15vw); 
             transform: translateY(-50%);
             color: var(--text-light);
             z-index: 10;
+        }
+
+        /* Prevent overlap on smaller screens like laptops */
+        @media (max-width: 1200px) {
+            .role-description {
+                left: calc(50% + 20vw);
+            }
+        }
         }
 
         .role-arrow {
