@@ -907,31 +907,41 @@
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true
         });
+// 🟢 BULLETPROOF PRELOADER: Forces script to wait until HTML is ready
+        function startLoader() {
+            const greetings = ["Hello", "Bonjour", "Hola", "Ciao", "Namaste", "Guten tag", "こんにちは"];
+            const loaderText = document.getElementById('loader-text');
+            const preloader = document.getElementById('preloader');
+            
+            // Safety check: if HTML is missing, stop script so it doesn't crash
+            if (!loaderText || !preloader) return;
 
-       const greetings = ["Hello", "Bonjour", "Hola", "Ciao", "Namaste", "Guten tag", "こんにちは"];
-        const loaderText = document.getElementById('loader-text');
-        const preloader = document.getElementById('preloader');
-        
-        let counter = 0;
-        const interval = setInterval(() => {
-            counter++;
-            if (counter < greetings.length) {
-                loaderText.innerText = greetings[counter];
-            } else {
-                clearInterval(interval);
-                // 🟢 Added delay and increased duration for the exact "Snellenberg" heavy slide effect
-                gsap.to(preloader, {
-                    yPercent: -100,
-                    duration: 1.2,
-                    ease: "power4.inOut",
-                    delay: 0.3,
-                    onComplete: () => {
-                        document.body.style.overflow = 'auto'; // Unlock scroll
-                    }
-                });
-            }
-        }, 250); /* 🟢 Changed from 180 to 250 to slow down the text flashing */
+            let counter = 0;
+            const interval = setInterval(() => {
+                counter++;
+                if (counter < greetings.length) {
+                    loaderText.innerText = greetings[counter];
+                } else {
+                    clearInterval(interval);
+                    gsap.to(preloader, {
+                        yPercent: -100,
+                        duration: 1.2,
+                        ease: "power4.inOut",
+                        delay: 0.3,
+                        onComplete: () => {
+                            document.body.style.overflow = 'auto'; // Unlock scroll
+                        }
+                    });
+                }
+            }, 250);
+        }
 
+        // Run the loader safely
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startLoader);
+        } else {
+            startLoader();
+        }
 
 
         function raf(time) {
