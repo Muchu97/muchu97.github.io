@@ -43,7 +43,8 @@
         .cursor {
             position: fixed; top: 0; left: 0; width: 15px; height: 15px;
             background-color: var(--text-dark); border-radius: 50%; pointer-events: none;
-            z-index: 9999; transform: translate(-50%, -50%);
+            z-index: 9999999; /* 🟢 FIX: Massive z-index to stay above menus and modals */
+            transform: translate(-50%, -50%);
             transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s, backdrop-filter 0.3s;
             display: flex; justify-content: center; align-items: center; text-align: center; mix-blend-mode: normal;
         }
