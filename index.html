@@ -50,7 +50,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-.cursor {
+        .cursor {
             position: fixed;
             top: 0;
             left: 0;
@@ -78,7 +78,6 @@
             -webkit-backdrop-filter: blur(8px);
             mix-blend-mode: normal; /* Ensures it stays as glass */
         }
-
 
         .cursor.view-project {
             width: 80px;
@@ -205,7 +204,6 @@
                 left: calc(50% + 20vw);
             }
         }
-        }
 
         .role-arrow {
             margin-bottom: 20px;
@@ -257,7 +255,7 @@
             100% { transform: translateX(-50%); }
         }
 
-         /* 🟢🟢🟢 LOOK HERE: START OF HERO IMAGE HOVER EFFECT 🟢🟢🟢 */
+        /* 🟢🟢🟢 LOOK HERE: START OF HERO IMAGE HOVER EFFECT 🟢🟢🟢 */
         /* 
            =============================================
            THE CYBER GLITCH DECRYPT REVEAL (SECURITY VIBE)
@@ -324,35 +322,6 @@
         }
         /* 🔴🔴🔴 END OF HERO IMAGE HOVER EFFECT 🔴🔴🔴 */
 
-
-        /* 
-           =============================================
-           THE HERO IMAGE CSS UPGRADE
-           =============================================
-        */
-        .hero-image-wrapper {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 85vh; 
-            z-index: 2; 
-        }
-
-        .hero-img {
-            height: 100%;
-            width: auto;
-            object-fit: cover;
-            /* Applies the professional high-contrast B&W editorial look */
-            filter: grayscale(100%) contrast(1.1) brightness(0.9);
-            transition: filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        /* Smoothly reveals your natural color when hovered */
-        .hero-img:hover {
-            filter: grayscale(0%) contrast(1) brightness(1);
-        }
-
         .container {
             max-width: 1600px;
             margin: 0 auto;
@@ -365,7 +334,7 @@
            =============================================
         */
         .about-section {
-            padding: 25vh 0;
+            padding: 20vh 0;
             background-color: var(--bg-white);
             display: grid;
             grid-template-columns: 1fr;
@@ -375,23 +344,25 @@
         @media (min-width: 900px) {
             .about-section {
                 grid-template-columns: 1.5fr 3.5fr; /* The signature offset grid */
-                align-items: flex-end;
+                align-items: flex-start; /* 🟢 FIX: Top-aligns the label with the text */
             }
         }
 
         .about-label {
-            font-size: 1rem;
+            font-size: 0.85rem; /* 🟢 FIX: Smaller, more refined label */
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--text-dark);
+            color: rgba(28, 29, 32, 0.6);
+            margin-top: 15px; /* 🟢 FIX: Drops it slightly to align perfectly with the first line of the big text */
             margin-bottom: 30px;
         }
 
         .about-text {
-            font-size: clamp(2rem, 3.5vw, 3.5rem);
-            line-height: 1.3;
-            letter-spacing: -1px;
+            font-size: clamp(1.5rem, 2.8vw, 2.8rem); /* 🟢 FIX: Reduced text size drastically */
+            line-height: 1.4;
+            letter-spacing: -0.5px;
             font-weight: 400;
+            max-width: 900px; /* Keeps the line lengths readable */
         }
 
         /* Styling for the SplitType words */
@@ -404,6 +375,7 @@
         .about-btn-wrapper {
             display: flex;
             align-items: center;
+            margin-top: 60px; /* 🟢 FIX: Adds proper breathing room below the text */
         }
 
         .about-circle-btn {
@@ -751,7 +723,7 @@
         </div>
 
         <div class="hero-image-wrapper">
-            <comment-tag id="1" text="Updated the image source to use the generated professional photo so you can preview it. When you upload your final, background-removed version to GitHub, simply change this back to 'profile-cutout.png'." type="suggestion"><img src="profile-cutout.png" alt="Musthalif" class="hero-img hover-trigger"></comment-tag>
+            <comment-tag id="1" text="Updated the image source to use the generated professional photo so you can preview it. When you upload your final, background-removed version to GitHub, simply change this back to 'profile-cutout.png'." type="suggestion"><img src="http://googleusercontent.com/image_generation_content/333" alt="Musthalif" class="hero-img hover-trigger"></comment-tag>
         </div>
     </section>
 
