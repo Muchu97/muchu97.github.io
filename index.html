@@ -910,7 +910,7 @@
 // 🟢 BULLETPROOF PRELOADER: Forces script to wait until HTML is ready
         function startLoader() {
             const greetings = ["Hello", "Bonjour", "Hola", "Ciao", "Namaste", "Guten tag", "こんにちは"];
-            const loaderText = document.getElementById('loader-text');
+            const loaderText = document.getElementById('preloader-text'); // 🟢 FIXED THE ID HERE
             const preloader = document.getElementById('preloader');
             
             // Safety check: if HTML is missing, stop script so it doesn't crash
