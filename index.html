@@ -121,17 +121,21 @@
         }
         .hero-nav a:hover::after, .footer-links a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
 
-        .location-pill {
+      .location-pill {
             position: absolute; top: 45%; left: 0; transform: translateY(-50%);
-            background-color: rgba(28, 29, 32, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            color: var(--text-light); padding: 25px 30px 25px 40px;
-            border-radius: 0 50px 50px 0; display: flex; align-items: center; gap: 25px; z-index: 100;
+            background-color: #1a1a1c; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            color: var(--text-light); padding: 15px 15px 15px 35px;
+            border-radius: 0 60px 60px 0; display: flex; align-items: center; gap: 30px; z-index: 100;
         }
-        .location-text { font-size: 1rem; font-weight: 500; line-height: 1.3; }
-        .globe-icon { width: 45px; height: 45px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        .location-text { font-size: 1.3rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.5px; }
+        .globe-icon { 
+            width: 65px; height: 65px; 
+            background-color: rgba(255, 255, 255, 0.2); /* Creates the filled circle look from your reference */
+            border-radius: 50%; display: flex; justify-content: center; align-items: center; 
+        }
         
         .globe-icon svg { 
-            width: 20px; height: 20px; fill: none; stroke: var(--text-light); stroke-width: 1.5; 
+            width: 32px; height: 32px; fill: none; stroke: var(--text-light); stroke-width: 1.5; 
             animation: spinGlobe 10s linear infinite;
         }
    @keyframes spinGlobe {
