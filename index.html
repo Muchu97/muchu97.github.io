@@ -121,16 +121,14 @@
         .magnetic-btn:hover { color: var(--text-light); border-color: transparent; }
         
         /* --- Symmetrical Left Button --- */
- .journey-trigger-wrapper { 
-        position: absolute; 
-        top: auto; 
-        bottom: calc(20vh + 55px); /* Positions it directly above the globe */
-        right: 5vw; 
-        left: auto;
-        transform: none; 
-        margin-top: 0; 
-        display: inline-block; 
-    }
+.journey-trigger-wrapper {
+    position: absolute; 
+    top: 45%; /* Matches the right side exactly */
+    right: calc(50% + 15vw); /* Perfectly mirrors the right button's spacing! */
+    transform: translateY(-50%);
+    margin-top: 95px; /* Pushes the button down to match "What do I do?" baseline */
+    z-index: 101;
+}
 @media (max-width: 1200px) { .journey-trigger-wrapper { right: calc(50% + 20vw); } }
 @media (max-width: 768px) { 
     .journey-trigger-wrapper { position: static; transform: none; right: auto; margin-top: 15px; display: inline-block; }
