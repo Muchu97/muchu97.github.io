@@ -119,6 +119,23 @@
         
         .magnetic-btn:hover::before { height: 100%; }
         .magnetic-btn:hover { color: var(--text-light); border-color: transparent; }
+        
+        /* --- Symmetrical Left Button --- */
+.journey-trigger-wrapper {
+    position: absolute; 
+    top: 45%; /* Matches the right side exactly */
+    right: calc(50% + 15vw); /* Perfectly mirrors the right button's spacing! */
+    transform: translateY(-50%);
+    margin-top: 95px; /* Pushes the button down to match "What do I do?" baseline */
+    z-index: 101;
+}
+@media (max-width: 1200px) { .journey-trigger-wrapper { right: calc(50% + 20vw); } }
+@media (max-width: 768px) { 
+    .journey-trigger-wrapper { position: static; transform: none; right: auto; margin-top: 15px; display: inline-block; }
+    /* Groups buttons together on mobile */
+    .role-description { display: flex; flex-direction: column; align-items: flex-start; }
+}
+
 
         /* HERO SECTION */
         .hero {
@@ -221,6 +238,205 @@
         }
 
         .container { max-width: 1600px; margin: 0 auto; padding: 0 5vw; }
+
+        /* --- HERO BUTTON ALIGNMENT --- */
+.hero-action-buttons {
+    display: flex; gap: 15px; align-items: center; position: relative; z-index: 101;
+}
+.journey-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 12px 25px; border: 1px solid rgba(0, 255, 204, 0.4); border-radius: 50px;
+    background: rgba(0, 255, 204, 0.05); color: #00ffcc; text-decoration: none;
+    font-size: 0.9rem; transition: all 0.3s; cursor: pointer;
+}
+.journey-btn:hover {
+    background: #00ffcc; color: #000; box-shadow: 0 0 15px rgba(0,255,204,0.4);
+}
+@media (max-width: 768px) {
+    .hero-action-buttons { flex-direction: row; margin-top: 15px; }
+    .what-i-do-btn, .journey-btn { margin-top: 0; padding: 10px 20px; font-size: 0.8rem; }
+}
+
+/* --- LEFT-ALIGNED JOURNEY BUTTON --- */
+.journey-left-btn {
+    position: absolute;
+    top: 60%; /* Drops it perfectly below the location pill */
+    left: 0;
+    padding: 15px 30px 15px 20px; 
+    border: 1px solid rgba(0, 255, 204, 0.4); 
+    border-left: none; /* Flat against the left edge */
+    border-radius: 0 50px 50px 0; /* Matches the globe pill shape */
+    background: rgba(0, 255, 204, 0.05); 
+    color: #00ffcc; 
+    text-decoration: none;
+    font-size: 1.1rem; 
+    font-weight: 500;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+    cursor: pointer; 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 101;
+}
+
+.journey-left-btn:hover {
+    background: #00ffcc; 
+    color: #000; 
+    box-shadow: 0 0 20px rgba(0,255,204,0.4);
+    padding-left: 35px; /* Creates a slick slide-out effect */
+}
+
+@media (max-width: 768px) {
+    .journey-left-btn {
+        top: auto;
+        bottom: 28vh; /* Stacks nicely above the title on phones */
+        left: 5vw;
+        border-radius: 50px; /* Fully rounded on mobile */
+        border-left: 1px solid rgba(0, 255, 204, 0.4);
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .journey-left-btn:hover {
+        padding-left: 20px; /* Disables slide-out on mobile */
+    }
+}
+
+/* --- CINEMATIC TIMELINE UI --- */
+.timeline-container { position: relative; max-width: 900px; margin: 0 auto; padding: 20px 0 10vh 0; }
+.timeline-line { 
+    position: absolute; left: 50px; top: 0; bottom: 0; width: 2px; 
+    background: rgba(255,255,255,0.05); box-shadow: 0 0 15px rgba(255,255,255,0.05); 
+}
+
+.timeline-item { position: relative; padding-left: 120px; margin-bottom: 50px; cursor: pointer; }
+.timeline-dot { 
+    position: absolute; left: 45px; top: 40px; width: 12px; height: 12px; 
+    border-radius: 50%; background: rgba(255,255,255,0.2); border: 2px solid #0a0a0c; 
+    z-index: 2; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+.timeline-card {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px; padding: 40px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative; overflow: hidden;
+}
+
+.timeline-date { font-family: monospace; color: rgba(255,255,255,0.4); font-size: 0.95rem; margin-bottom: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.timeline-company { font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 400; color: #fff; margin-bottom: 5px; letter-spacing: -1px; transition: color 0.4s; }
+.timeline-role { font-size: 1.1rem; color: #888; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; transition: color 0.4s; }
+.explore-text { margin-top: 30px; font-size: 0.9rem; color: #fff; opacity: 0; transform: translateX(-15px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); font-weight: 500; font-family: monospace; }
+
+/* Physics Hover Overrides */
+.timeline-item:hover .explore-text { opacity: 1; transform: translateX(0); }
+.timeline-item:hover .timeline-card { transform: translateY(-8px) scale(1.01); }
+
+/* RR Donnelley (Google Color Matrix) */
+.timeline-item:hover .rrd-dot { background: #4285F4; box-shadow: 0 0 20px #4285F4; border-color: #4285F4; }
+.timeline-item:hover .rrd-card {
+    border-color: rgba(66, 133, 244, 0.4);
+    background: linear-gradient(145deg, rgba(66, 133, 244, 0.08) 0%, rgba(234, 67, 53, 0.03) 100%);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 40px rgba(66, 133, 244, 0.05);
+}
+.timeline-item:hover .rrd-card .timeline-company { color: #fff; }
+.timeline-item:hover .rrd-card .timeline-role { color: #4285F4; }
+.timeline-item:hover .rrd-card .explore-text { color: #EA4335; }
+
+/* Intellect (Royal Bank Gold) */
+.timeline-item:hover .intellect-dot { background: #D4AF37; box-shadow: 0 0 20px #D4AF37; border-color: #D4AF37; }
+.timeline-item:hover .intellect-card {
+    border-color: rgba(212, 175, 55, 0.4);
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.08) 0%, rgba(10, 20, 40, 0.5) 100%);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 40px rgba(212, 175, 55, 0.05);
+}
+.timeline-item:hover .intellect-card .timeline-role { color: #D4AF37; }
+.timeline-item:hover .intellect-card .explore-text { color: #D4AF37; }
+
+@media (max-width: 768px) {
+    .timeline-line { left: 20px; }
+    .timeline-dot { left: 15px; top: 30px; }
+    .timeline-item { padding-left: 50px; margin-bottom: 30px; }
+    .timeline-card { padding: 25px; }
+    .timeline-company { font-size: 2rem; }
+    .timeline-role { font-size: 0.9rem; }
+}
+
+
+/* --- DRILL-DOWN CANVAS & PHYSICS --- */
+.journey-canvas {
+    position: fixed; top: 100vh; left: 0; width: 100vw; height: 100vh;
+    background-color: var(--bg-dark); z-index: 999998; display: flex; flex-direction: column;
+}
+.journey-nav { display: flex; justify-content: space-between; padding: 40px 5vw; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.journey-close { background: none; border: none; font-size: 1.1rem; cursor: pointer; color: #fff; }
+.journey-viewport { position: relative; flex: 1; width: 100%; overflow: hidden; }
+
+/* Panels */
+.journey-panel {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    padding: 5vh 5vw; overflow-y: auto;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s;
+    opacity: 0; pointer-events: none;
+}
+.journey-panel.active-panel { opacity: 1; pointer-events: auto; transform: translateX(0%); }
+.journey-panel.slide-left { transform: translateX(-50%); opacity: 0; }
+.journey-panel.detail-panel { transform: translateX(100%); }
+.journey-panel.detail-panel.active-panel { transform: translateX(0%); }
+
+/* Roster List */
+.journey-header { font-size: clamp(3rem, 6vw, 6rem); font-weight: 400; letter-spacing: -2px; color: #fff; margin-bottom: 8vh; }
+.roster-item {
+    display: flex; justify-content: space-between; align-items: center; padding: 40px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: padding-left 0.4s;
+}
+.roster-item:hover { padding-left: 20px; background: rgba(255,255,255,0.02); }
+.roster-meta { font-family: monospace; color: #888; width: 25%; font-size: 1.1rem; }
+.roster-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.roster-title { font-size: clamp(2rem, 4vw, 4rem); font-weight: 400; color: #fff; margin: 0; }
+.roster-role { font-size: 1.1rem; color: #00ffcc; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+.roster-arrow { font-size: 2rem; color: #455CE9; transition: transform 0.3s; }
+.roster-item:hover .roster-arrow { transform: translateX(10px); }
+/* Details Layout */
+.back-btn { background: none; border: none; color: #888; font-size: 1rem; cursor: pointer; margin-bottom: 4vh; text-transform: uppercase; letter-spacing: 1px; }
+.back-btn:hover { color: #fff; }
+.detail-content { padding: 50px; border-radius: 12px; }
+.detail-title { font-size: clamp(2.5rem, 5vw, 5rem); letter-spacing: -2px; margin-bottom: 10px; }
+.detail-role { font-size: 1.2rem; margin-bottom: 40px; font-weight: 400; }
+.detail-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 40px; }
+@media (min-width: 768px) { .detail-grid { grid-template-columns: 1fr 1fr; gap: 80px; } }
+.detail-col h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+.detail-col p, .detail-col ul { font-size: 1.1rem; line-height: 1.7; }
+.detail-col ul { padding-left: 20px; }
+.detail-col li { margin-bottom: 10px; }
+.tech-stack-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 40px; }
+.tech-stack-pills span { padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.2); }
+
+/* --- THEME 1: ROYAL GOOGLE (RRD) --- */
+.theme-google .detail-content {
+    background: #0d1117; color: #fff; position: relative; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05);
+}
+/* Google Multi-Color Glowing Accent Bar */
+.theme-google-accent {
+    position: absolute; top: 0; left: 0; width: 100%; height: 6px;
+    background: linear-gradient(90deg, #4285F4 25%, #EA4335 25% 50%, #FBBC05 50% 75%, #34A853 75%);
+    box-shadow: 0 0 15px rgba(66, 133, 244, 0.4);
+}
+.theme-google .detail-title { color: #fff; }
+.theme-google .detail-role { color: #4285F4; }
+.theme-google .detail-col h4 { color: #888; }
+.theme-google .detail-col p, .theme-google .detail-col ul { color: #ccc; }
+
+/* --- THEME 2: ROYAL BANKING (INTELLECT) --- */
+.theme-banking .detail-content {
+    background: linear-gradient(135deg, #020b1a 0%, #0a192f 100%);
+    color: #e6f1ff; border: 1px solid #D4AF37;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 20px rgba(212,175,55,0.05);
+}
+.theme-banking .detail-title { color: #D4AF37; font-family: 'Times New Roman', serif; }
+.theme-banking .detail-role { color: #8892b0; }
+.theme-banking .detail-col h4 { color: #D4AF37; opacity: 0.8; }
+.theme-banking .detail-col p, .theme-banking .detail-col ul { color: #a8b2d1; }
+.theme-banking .gold-pill { border-color: rgba(212,175,55,0.4) !important; color: #D4AF37; background: rgba(212,175,55,0.05); }
 
         /* ABOUT SECTION */
         .about-section {
@@ -408,8 +624,15 @@
         .menu-socials a::after { content: ''; position: absolute; width: 100%; height: 1px; bottom: -2px; left: 0; background-color: currentColor; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
         .menu-socials a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
 
-        /* MOBILE RESPONSIVE FIXES */
+     /* MOBILE RESPONSIVE FIXES */
         @media (max-width: 768px) {
+            /* Roster Mobile Fixes */
+            .roster-item { flex-direction: column; align-items: flex-start; gap: 15px; position: relative; }
+            .roster-meta { width: 100%; font-size: 0.9rem; }
+            .roster-arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
+            .roster-item:hover .roster-arrow { transform: translateY(-50%) translateX(10px); }
+
+            /* Hero & Nav Mobile Fixes */
             .hero-nav { display: none; } 
             .floating-menu-btn { transform: scale(1) !important; top: 20px; right: 20px; width: 60px; height: 60px; } 
             .brand-logo { top: 35px; left: 20px; }
@@ -425,9 +648,6 @@
             .role-description { left: 5vw; top: auto; bottom: 20vh; transform: none; }
             .role-text { font-size: 1.5rem; margin-bottom: 20px; }
             
-            /* Make sure the button is visible on mobile */
-            .what-i-do-btn { margin-top: 15px; padding: 10px 20px; font-size: 0.8rem; }
-
             .about-section { gap: 40px; padding: 10vh 0; }
             .about-text { font-size: 2rem; }
             .about-circle-btn { width: 120px; height: 120px; }
@@ -449,6 +669,7 @@
             .archive-table { display: block; overflow-x: auto; white-space: nowrap; }
             .archive-table td:first-child { font-size: 1.5rem; }
         }
+
        /* ARSENAL: God of War Theme (Ash, Blood, and Spartan Gold) */
         .stack-page { 
             position: fixed; top: 100vh; left: 0; width: 100vw; height: 100vh; 
@@ -1238,6 +1459,104 @@
         </table>
     </div>
 
+    <!-- JOURNEY / EXPERIENCE DRILL-DOWN CANVAS -->
+    <div class="journey-canvas" id="journey-canvas" data-lenis-prevent>
+        <div class="journey-nav">
+            <div class="brand-logo" style="position: static; color: #fff; z-index: 10;">© My Journey</div>
+            <button class="journey-close hover-trigger" id="journey-close-btn">Close ✕</button>
+        </div>
+
+        <div class="journey-viewport">
+            
+        <!-- LEVEL 1: CINEMATIC TIMELINE -->
+            <div class="journey-panel active-panel" id="panel-roster">
+                <h1 class="journey-header" style="text-align: center; margin-top: 2vh;">The Timeline</h1>
+                
+                <div class="timeline-container">
+                    <!-- The Glowing Vertical Axis -->
+                    <div class="timeline-line"></div>
+                    
+                    <!-- RR Donnelley Node -->
+                    <div class="timeline-item hover-trigger" data-target="panel-rrd">
+                        <div class="timeline-dot rrd-dot"></div>
+                        <div class="timeline-card rrd-card">
+                            <div class="timeline-date">2021 — Present</div>
+                            <h2 class="timeline-company">RR Donnelley</h2>
+                            <h3 class="timeline-role">Senior Network Security Engineer</h3>
+                            <div class="explore-text">Explore Sector ➔</div>
+                        </div>
+                    </div>
+
+                    <!-- Intellect Node -->
+                    <div class="timeline-item hover-trigger" data-target="panel-intellect">
+                        <div class="timeline-dot intellect-dot"></div>
+                        <div class="timeline-card intellect-card">
+                            <div class="timeline-date">2019 — 2021</div>
+                            <h2 class="timeline-company">Intellect Design Arena</h2>
+                            <h3 class="timeline-role">Junior Network Engineer</h3>
+                            <div class="explore-text">Explore Sector ➔</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- LEVEL 2: RR DONNELLEY (ROYAL GOOGLE THEME) -->
+            <div class="journey-panel detail-panel theme-google" id="panel-rrd">
+                <button class="back-btn hover-trigger">← Back to Roster</button>
+                <div class="detail-content">
+                    <div class="theme-google-accent"></div>
+                    <h2 class="detail-title">RR Donnelley</h2>
+                    <h3 class="detail-role">Senior Network Security Engineer</h3>
+                    
+                    <div class="detail-grid">
+                        <div class="detail-col">
+                            <h4>Day-to-Day Matrix</h4>
+                            <p>Orchestrating global network security policies across a highly distributed enterprise topology. Serving as the primary escalation point for critical P1 firewall and routing anomalies. Continuously auditing and optimizing BGP/OSPF adjacencies to guarantee zero-packet-loss communication between global data centers.</p>
+                        </div>
+                        <div class="detail-col">
+                            <h4>Major Deployments</h4>
+                            <ul>
+                                <li>Engineered a zero-downtime migration to Palo Alto HA clusters across 5 international zones.</li>
+                                <li>Designed and enforced strict Zero Trust Network Access (ZTNA) utilizing Prisma Access.</li>
+                                <li>Automated threat-hunting workflows using Python and REST APIs.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tech-stack-pills">
+                        <span>Palo Alto</span><span>Prisma</span><span>BGP/OSPF</span><span>Python</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEVEL 2: INTELLECT DESIGN (ROYAL BANKING THEME) -->
+            <div class="journey-panel detail-panel theme-banking" id="panel-intellect">
+                <button class="back-btn hover-trigger">← Back to Roster</button>
+                <div class="detail-content">
+                    <h2 class="detail-title">Intellect Design Arena</h2>
+                    <h3 class="detail-role">Junior Network Engineer</h3>
+                    
+                    <div class="detail-grid">
+                        <div class="detail-col">
+                            <h4>The Vault Operations</h4>
+                            <p>Maintained and secured mission-critical financial networks handling highly sensitive banking data. Enforced strict perimeter access controls, implemented robust IPSec VPN tunnels for secure branch connectivity, and executed routine disaster recovery drills to ensure absolute resilience.</p>
+                        </div>
+                        <div class="detail-col">
+                            <h4>Major Deployments</h4>
+                            <ul>
+                                <li>Hardened 200+ Cisco routing devices to meet strict financial compliance standards.</li>
+                                <li>Deployed comprehensive network monitoring utilizing SolarWinds NPM.</li>
+                                <li>Architected isolated VLAN infrastructures to segment unverified traffic from core banking applications.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tech-stack-pills">
+                        <span class="gold-pill">Cisco ASA</span><span class="gold-pill">SolarWinds</span><span class="gold-pill">VLAN</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- AWWWARDS PAGE OVERLAY -->
     <div class="awwwards-page" id="awwwards-page" data-lenis-prevent>
         <div class="awwwards-nav">
@@ -1355,6 +1674,12 @@
             </div>
     </div>
 
+   <!-- LEFT SYMMETRICAL BUTTON -->
+        <div class="journey-trigger-wrapper">
+            <a id="open-journey-btn" class="what-i-do-btn hover-trigger">The Journey</a>
+        </div>
+
+    
         <div class="role-description">
             <div class="role-arrow">
                 <svg viewBox="0 0 24 24">
@@ -2363,20 +2688,97 @@ if (targetId === '#contact-page' || targetId === '#about-page' || targetId === '
             });
         });
 
-        // 4. Heavy Hero Parallax & Blur
+        // 4. Clean Hero Parallax (No Shrinking or Blurring)
         gsap.to('.hero-image-wrapper', {
-            yPercent: 40,
-            scale: 0.9,
-            filter: "blur(8px)", // Blurs out as it goes down
+            yPercent: 15, /* Subtle downward float as you scroll */
             ease: 'none',
             scrollTrigger: {
                 trigger: '.hero',
                 start: 'top top',
                 end: 'bottom top',
-                scrub: 0.5 // Adding a slight delay to the scrub makes it feel heavier
+                scrub: true
             }
         });
+
+        // 4. Heavy Hero Parallax & Blur
+        // gsap.to('.hero-image-wrapper', {
+        //     yPercent: 40,
+        //     scale: 0.9,
+        //     filter: "blur(8px)", // Blurs out as it goes down
+        //     ease: 'none',
+        //     scrollTrigger: {
+        //         trigger: '.hero',
+        //         start: 'top top',
+        //         end: 'bottom top',
+        //         scrub: 0.5 // Adding a slight delay to the scrub makes it feel heavier
+        //     }
+        // });
+
+
         // --------------------------------------------------------
+
+        // --- JOURNEY DRILL-DOWN LOGIC ---
+        const journeyBtn = document.getElementById('open-journey-btn');
+        const journeyCanvas = document.getElementById('journey-canvas');
+        const journeyCloseBtn = document.getElementById('journey-close-btn');
+
+        const rosterPanel = document.getElementById('panel-roster');
+        const drillDownTriggers = document.querySelectorAll('.timeline-item');
+        const backBtns = document.querySelectorAll('.back-btn');
+
+        // Open Canvas with Transition
+        if (journeyBtn && journeyCanvas) {
+            journeyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if(isMenuOpen) toggleMenu(); 
+                
+                triggerTransition('Journey', () => { 
+                    gsap.set(journeyCanvas, { top: 0 }); 
+                    journeyCanvas.scrollTop = 0;
+                    
+                    document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('active-panel'));
+                    rosterPanel.classList.remove('slide-left');
+                    rosterPanel.classList.add('active-panel');
+                });
+            });
+        }
+
+        // Close Canvas with Transition
+        if (journeyCloseBtn) {
+            journeyCloseBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                triggerTransition('Home', () => { 
+                    gsap.set(journeyCanvas, { top: "100vh" }); 
+                });
+            });
+        }
+
+        // Drill Down (Slide Left)
+        drillDownTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const targetId = trigger.getAttribute('data-target');
+                const targetPanel = document.getElementById(targetId);
+                
+                rosterPanel.classList.remove('active-panel');
+                rosterPanel.classList.add('slide-left');
+                
+                targetPanel.classList.add('active-panel');
+                targetPanel.scrollTop = 0; // Scroll new panel to top
+            });
+        });
+
+        // Go Back (Slide Right)
+        backBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Hide all detail panels
+                document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('active-panel'));
+                
+                // Bring timeline back
+                rosterPanel.classList.remove('slide-left');
+                rosterPanel.classList.add('active-panel');
+            });
+        });
+
     </script>
 </body>
 </html>
