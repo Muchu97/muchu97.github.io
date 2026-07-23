@@ -121,19 +121,31 @@
         .magnetic-btn:hover { color: var(--text-light); border-color: transparent; }
         
         /* --- Symmetrical Left Button --- */
+./* --- Symmetrical Left Button --- */
 .journey-trigger-wrapper {
     position: absolute; 
-    top: 45%; /* Matches the right side exactly */
-    right: calc(50% + 15vw); /* Perfectly mirrors the right button's spacing! */
+    top: 45%; 
+    right: calc(50% + 15vw); 
     transform: translateY(-50%);
-    margin-top: 95px; /* Pushes the button down to match "What do I do?" baseline */
     z-index: 101;
 }
-@media (max-width: 1200px) { .journey-trigger-wrapper { right: calc(50% + 20vw); } }
+@media (max-width: 1200px) { 
+    .journey-trigger-wrapper { right: calc(50% + 20vw); } 
+}
 @media (max-width: 768px) { 
-    .journey-trigger-wrapper { position: static; transform: none; right: auto; margin-top: 15px; display: inline-block; }
-    /* Groups buttons together on mobile */
-    .role-description { display: flex; flex-direction: column; align-items: flex-start; }
+    .journey-trigger-wrapper { 
+        /* Top 1% Mobile UX: Anchor to the right, float above the globe */
+        position: absolute !important; 
+        top: auto !important; 
+        bottom: calc(20vh + 80px) !important; 
+        right: 5vw !important; 
+        left: auto !important;
+        transform: none !important; 
+        margin: 0 !important;
+        display: inline-flex !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
 }
 
 
