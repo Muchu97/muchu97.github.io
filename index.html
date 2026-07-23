@@ -122,15 +122,18 @@
         
         /* --- Symmetrical Left Button --- */
 ./* --- Symmetrical Left Button --- */
+/* --- Symmetrical Left Button --- */
 .journey-trigger-wrapper {
     position: absolute; 
     top: 45%; 
-    right: calc(50% + 15vw); 
+    /* Pushed further left to completely clear the hero image */
+    right: calc(50% + 22vw); 
     transform: translateY(-50%);
-    z-index: 101;
+    /* Max z-index to guarantee it is always clickable and on top */
+    z-index: 999; 
 }
 @media (max-width: 1200px) { 
-    .journey-trigger-wrapper { right: calc(50% + 20vw); } 
+    .journey-trigger-wrapper { right: calc(50% + 28vw); } 
 }
 @media (max-width: 768px) { 
     .journey-trigger-wrapper { 
@@ -145,9 +148,9 @@
         display: inline-flex !important;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+        z-index: 999 !important;
     }
 }
-
 
         /* HERO SECTION */
         .hero {
