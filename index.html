@@ -783,6 +783,84 @@
         -webkit-backdrop-filter: blur(10px) !important;
     }
 }
+
+/* --- INTERACTIVE ZTNA SANDBOX --- */
+        .zt-sandbox-wrapper {
+            background: rgba(10, 10, 12, 0.8); border: 1px solid rgba(218, 165, 32, 0.3);
+            border-radius: 12px; padding: 40px; margin-bottom: 8vh; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(218,165,32,0.02);
+            overflow: hidden; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        }
+        
+        .zt-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; border-bottom: 1px solid rgba(218, 165, 32, 0.2); padding-bottom: 20px; flex-wrap: wrap; gap: 20px; }
+        .zt-header h3 { font-size: 1.5rem; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; margin: 0; display: flex; align-items: center; gap: 15px; }
+        .zt-header h3::before { content: ''; display: block; width: 12px; height: 12px; background: #daa520; border-radius: 50%; box-shadow: 0 0 10px #daa520; }
+        
+        /* The ZTNA Toggle Switch */
+        .zt-toggle-container { display: flex; align-items: center; gap: 15px; }
+        .zt-toggle-label { font-family: monospace; color: rgba(255,255,255,0.6); font-size: 1.1rem; text-transform: uppercase; transition: color 0.3s; }
+        .zt-switch { position: relative; width: 70px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 50px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: all 0.4s; pointer-events: auto; }
+        .zt-slider { position: absolute; top: 3px; left: 4px; width: 26px; height: 26px; background: rgba(255,255,255,0.4); border-radius: 50%; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .zt-switch.active { background: rgba(218, 165, 32, 0.15); border-color: #daa520; box-shadow: inset 0 0 15px rgba(218, 165, 32, 0.2); }
+        .zt-switch.active .zt-slider { left: 38px; background: #daa520; box-shadow: 0 0 15px #daa520; }
+        
+        /* The Network Stage */
+        .zt-stage { position: relative; height: 100px; display: flex; justify-content: space-between; align-items: center; z-index: 2; }
+        .zt-track { position: absolute; top: 50%; left: 10%; width: 80%; height: 2px; background: repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 10px, transparent 10px, transparent 20px); transform: translateY(-50%); z-index: 1; }
+        
+        .zt-node { position: relative; width: 80px; height: 80px; background: #0a0a0c; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 3; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .zt-node-icon { font-size: 1.8rem; margin-bottom: 5px; }
+        .zt-node-text { font-size: 0.7rem; font-family: monospace; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+        
+        /* Specific Nodes */
+        .node-fw { border-color: rgba(218, 165, 32, 0.4); transition: all 0.4s; }
+        .node-fw::after { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border: 2px solid transparent; border-radius: 18px; transition: all 0.4s; pointer-events: none; }
+        .zt-switch.active ~ .zt-stage .node-fw { border-color: #daa520; background: rgba(218, 165, 32, 0.05); box-shadow: 0 0 30px rgba(218, 165, 32, 0.2); }
+        .zt-switch.active ~ .zt-stage .node-fw::after { border-color: rgba(218, 165, 32, 0.6); box-shadow: 0 0 20px rgba(218, 165, 32, 0.3) inset; }
+        
+        /* The Packets */
+        .zt-packet { position: absolute; top: 50%; left: 10%; width: 12px; height: 12px; border-radius: 50%; transform: translate(-50%, -50%); z-index: 4; pointer-events: none; opacity: 0; }
+        .packet-auth { background: #fff; box-shadow: 0 0 15px #fff, 0 0 30px #daa520; }
+        .packet-mal { background: #ff3333; box-shadow: 0 0 15px #ff3333, 0 0 30px #8b0000; }
+        
+        .packet-explosion { position: absolute; font-size: 1.2rem; font-family: monospace; color: #ff3333; font-weight: bold; pointer-events: none; transform: translate(-50%, -50%); text-shadow: 0 0 10px #ff3333; z-index: 5; }
+    
+  /* --- 15. STEALTH MODE (NUCLEAR OVERRIDE) --- */
+        body.stealth-mode { background-color: #020202 !important; }
+        
+        /* Hijack ALL text, borders, and fonts */
+        body.stealth-mode * {
+            color: #00ff41 !important;
+            border-color: rgba(0, 255, 65, 0.3) !important;
+            font-family: 'Courier New', Courier, monospace !important;
+        }
+
+        /* Darken all overlays and backgrounds to pure black */
+        body.stealth-mode .menu-overlay,
+        body.stealth-mode .journey-canvas,
+        body.stealth-mode .archive-page,
+        body.stealth-mode .contact-page,
+        body.stealth-mode .awwwards-page,
+        body.stealth-mode .stack-page,
+        body.stealth-mode .hero,
+        body.stealth-mode .about-section,
+        body.stealth-mode .work-section,
+        body.stealth-mode .footer {
+            background: #050505 !important;
+        }
+
+        /* Fix specific fills and accents */
+        body.stealth-mode .footer-curve-wrapper path { fill: #050505 !important; }
+        body.stealth-mode svg { stroke: #00ff41 !important; }
+        body.stealth-mode .magnetic-btn::before { background-color: rgba(0, 255, 65, 0.2) !important; }
+        body.stealth-mode .cursor { background-color: rgba(0, 255, 65, 0.5) !important; box-shadow: 0 0 15px #00ff41 !important; border-color: #00ff41 !important; }
+        
+        /* Toggle Switch UI */
+.stealth-toggle-container { margin-bottom: 30px; display: flex; align-items: center; justify-content: flex-start; gap: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }        .stealth-label { font-size: 0.85rem; text-transform: uppercase; color: rgba(255,255,255,0.5); letter-spacing: 2px; font-family: monospace; }
+.stealth-switch { width: 64px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50px; position: relative; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s; z-index: 999999; pointer-events: auto !important; }        .stealth-slider { position: absolute; top: 3px; left: 4px; width: 24px; height: 24px; background: #fff; border-radius: 50%; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        
+        body.stealth-mode .stealth-switch { background: rgba(0, 255, 65, 0.1) !important; border-color: #00ff41 !important; }
+        body.stealth-mode .stealth-slider { left: 34px !important; background: #00ff41 !important; box-shadow: 0 0 15px #00ff41 !important; }
     </style>
 </head>
 <body>
@@ -803,11 +881,32 @@
         </div>
     </button>
 
-  <!-- SLIDE-OUT MENU OVERLAY -->
+<!-- SLIDE-OUT MENU OVERLAY -->
     <div class="menu-overlay" id="menu-overlay">
         <div class="menu-inner">
+            
+           <!-- 15. STEALTH MODE TOGGLE -->
+            <div class="stealth-toggle-container" style="position: relative; z-index: 999999; pointer-events: auto;">
+                <span class="stealth-label">Initialize_Stealth</span>
+                <div class="stealth-switch hover-trigger" id="stealth-toggle-btn">
+                    <div class="stealth-slider" style="pointer-events: none;"></div>
+                </div>
+            </div>
+
             <div class="menu-header">Navigation</div>
-         <nav class="menu-nav">
+           <!-- 15. STEALTH MODE TOGGLE (NATIVE HTML FIX) -->
+            <label class="hover-trigger" style="position: relative; z-index: 999999; pointer-events: auto; cursor: pointer; display: flex; align-items: center; justify-content: flex-start; gap: 20px; margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); width: fit-content;">
+                <span class="stealth-label" style="pointer-events: none;">Initialize_Stealth</span>
+                
+                <!-- Native Checkbox hidden behind the scenes -->
+                <input type="checkbox" style="display: none;" onchange="document.body.classList.toggle('stealth-mode');">
+                
+                <!-- The visual switch -->
+                <div class="stealth-switch" style="pointer-events: none;">
+                    <div class="stealth-slider"></div>
+                </div>
+            </label>
+            <nav class="menu-nav">
                 <a href="#home" class="menu-link-item hover-trigger">Home</a>
                 <a href="#work" class="menu-link-item hover-trigger">Work</a>
                 <a href="#stack-page" class="menu-link-item hover-trigger stack-trigger">Arsenal</a>
@@ -818,14 +917,13 @@
                 <div class="menu-header" style="margin-bottom: 20px;">Socials</div>
                 <div class="menu-socials">
                     <a class="awwwards-link hover-trigger">Awwwards</a>
-                    <a href="Musthalif_Meeran_Network_Engineer_CCNP_2026_.pdf" download="Musthalif_Meeran_Resume.pdf" class="hover-trigger">Resume</a>
+                    <a class="dossier-trigger hover-trigger" style="cursor:pointer;">Resume</a>
                     <a href="https://github.com/Muchu97" target="_blank" class="hover-trigger">GitHub</a>
                     <a href="https://www.linkedin.com/in/musthalif-meeran-61104b1b8/" target="_blank" class="hover-trigger">LinkedIn</a>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- PAGE TRANSITION OVERLAY -->
     <div class="page-transition" id="page-transition">
         <div class="page-transition-text" id="page-transition-text">Work</div>
@@ -1114,6 +1212,37 @@
             <p style="font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.6; color: #b3b3b3; max-width: 900px; margin-bottom: 8vh; border-left: 4px solid #daa520; padding-left: 20px;">
                 I do not merely configure firewalls; I forge the impenetrable walls that protect the realm's most critical assets. As a <strong>Master of Network Security</strong>, I command the flow of traffic, orchestrate automated defenses, and repel sieges from unseen adversaries. I thrive in the chaos of a breach, tracking packets through the dark, and automating the mundane to focus on engineering the ultimate defense.
             </p>
+            <!-- INTERACTIVE ZTNA SANDBOX -->
+            <div class="zt-sandbox-wrapper">
+                <div class="zt-header">
+                    <h3>Live Threat Simulation</h3>
+                    <div class="zt-toggle-container">
+                        <span class="zt-toggle-label" id="zt-status-text">Perimeter: VULNERABLE</span>
+                        <div class="zt-switch hover-trigger" id="zt-toggle-btn">
+                            <div class="zt-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="zt-stage" id="zt-stage">
+                    <div class="zt-track"></div>
+                    
+                    <div class="zt-node">
+                        <div class="zt-node-icon">🌐</div>
+                        <div class="zt-node-text">Public Web</div>
+                    </div>
+                    
+                    <div class="zt-node node-fw">
+                        <div class="zt-node-icon">🛡️</div>
+                        <div class="zt-node-text">Prisma SASE</div>
+                    </div>
+                    
+                    <div class="zt-node">
+                        <div class="zt-node-icon">🖥️</div>
+                        <div class="zt-node-text">Internal App</div>
+                    </div>
+                </div>
+            </div>
             
             <div style="display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 10vh;">
                 
@@ -1241,26 +1370,29 @@
                 <div class="contact-details-block contact-socials">
                     <h5>Socials</h5>
                     <a class="awwwards-link hover-trigger" style="cursor:pointer; display:block;">Awwwards</a>
-                    <a href="Musthalif_Meeran_Network_Engineer_CCNP_2026_.pdf" download="Musthalif_Meeran_Resume.pdf" class="hover-trigger" style="display:block;">Resume</a>
-                    <a href="https://github.com/Muchu97" target="_blank" class="hover-trigger" style="display:block;">GitHub</a>
+<a class="dossier-trigger hover-trigger" style="cursor:pointer; display:block;">Resume</a>                    <a href="https://github.com/Muchu97" target="_blank" class="hover-trigger" style="display:block;">GitHub</a>
                     <a href="https://www.linkedin.com/in/musthalif-meeran-61104b1b8/" target="_blank" class="hover-trigger" style="display:block;">LinkedIn</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ARCHIVE PAGE -->
+  <!-- ARCHIVE PAGE -->
     <div class="archive-page" id="archive-page" data-lenis-prevent>
         <div class="archive-nav">
             <div class="brand-logo" style="position: static; color: var(--text-dark); z-index: 10;">© Code by Musthalif</div>
             <button class="archive-close hover-trigger" id="archive-close-btn">Close ✕</button>
         </div>
         <h1 class="archive-header">Architecting secure digital networks</h1>
+        
+        <!-- THE NEW FILTER PILLS -->
         <div class="archive-filters">
-            <div class="filter-pill active hover-trigger">All</div>
-            <div class="filter-pill hover-trigger">Cloud</div>
-            <div class="filter-pill hover-trigger">Security</div>
+            <div class="filter-pill active hover-trigger" data-filter="all">All</div>
+            <div class="filter-pill hover-trigger" data-filter="cloud">Cloud / Routing</div>
+            <div class="filter-pill hover-trigger" data-filter="ztna">Zero Trust</div>
+            <div class="filter-pill hover-trigger" data-filter="devsecops">DevSecOps / Automation</div>
         </div>
+        
         <table class="archive-table">
             <thead>
                 <tr>
@@ -1271,12 +1403,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="hover-project" data-title="Enterprise Palo Alto HA Migration" data-context="Cloud Architecture" data-image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" 
+                <!-- Project 1 -->
+                <tr class="hover-project archive-row" data-category="cloud" data-title="Enterprise Palo Alto HA Migration" data-context="Cloud Architecture" data-image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" 
                 data-desc="
                 <div style='margin-bottom: 30px;'>
                     <p style='font-size: 1.3rem; line-height: 1.5; color: rgba(28, 29, 32, 0.8);'><strong>Executive Summary:</strong> Architected and executed a zero-downtime enterprise migration to Next-Generation Palo Alto High Availability (Active/Passive) clusters, eliminating catastrophic single points of failure.</p>
                 </div>
-                
                 <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;'>
                     <div style='padding: 25px; background-color: rgba(28, 29, 32, 0.03); border-left: 3px solid #1C1D20;'>
                         <h4 style='font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: rgba(28, 29, 32, 0.5);'>The Legacy Architecture</h4>
@@ -1287,7 +1419,6 @@
                         <p style='font-size: 1rem; font-family: monospace; color: #455CE9;'>PAN-OS • HA1/HA2 Links • BGP/OSPF • Panorama</p>
                     </div>
                 </div>
-    
                 <div style='margin-bottom: 40px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Engineering Execution</h4>
                     <ul style='list-style-type: none; padding: 0;'>
@@ -1296,7 +1427,6 @@
                         <li style='margin-bottom: 10px; position: relative; padding-left: 20px;'><span style='position: absolute; left: 0; top: 0; color: #455CE9;'>■</span> <strong>Zero-Downtime Cutover:</strong> Orchestrated a flawless cutover during a critical maintenance window, migrating 100+ site-to-site VPNs with absolute zero packet loss.</li>
                     </ul>
                 </div>
-    
                 <div style='border-top: 1px solid rgba(28, 29, 32, 0.1); padding-top: 30px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Business Impact</h4>
                     <div style='display: flex; gap: 20px; flex-wrap: wrap;'>
@@ -1317,12 +1447,13 @@
                 ">
                     <td>Global Finance Bank</td><td>New York, USA</td><td>Cloud Migration & HA</td><td>2024</td>
                 </tr>
-                <tr class="hover-project" data-title="Global ZTNA Deployment" data-context="Zero Trust / Prisma" data-image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" 
+
+                <!-- Project 2 -->
+                <tr class="hover-project archive-row" data-category="ztna" data-title="Global ZTNA Deployment" data-context="Zero Trust / Prisma" data-image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" 
                 data-desc="
                 <div style='margin-bottom: 30px;'>
                     <p style='font-size: 1.3rem; line-height: 1.5; color: rgba(28, 29, 32, 0.8);'><strong>Executive Summary:</strong> Spearheaded the global rollout of a Zero Trust Network Access (ZTNA) ecosystem via Prisma Access, aggressively shrinking the attack surface while delivering frictionless access for a distributed global workforce.</p>
                 </div>
-                
                 <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;'>
                     <div style='padding: 25px; background-color: rgba(28, 29, 32, 0.03); border-left: 3px solid #1C1D20;'>
                         <h4 style='font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: rgba(28, 29, 32, 0.5);'>The Legacy Architecture</h4>
@@ -1333,7 +1464,6 @@
                         <p style='font-size: 1rem; font-family: monospace; color: #455CE9;'>Prisma Access • GlobalProtect • SAML/SSO • Azure AD</p>
                     </div>
                 </div>
-    
                 <div style='margin-bottom: 40px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Engineering Execution</h4>
                     <ul style='list-style-type: none; padding: 0;'>
@@ -1342,7 +1472,6 @@
                         <li style='margin-bottom: 10px; position: relative; padding-left: 20px;'><span style='position: absolute; left: 0; top: 0; color: #455CE9;'>■</span> <strong>Micro-Segmentation:</strong> Designed highly granular, app-specific access policies mapping user identity to strict resource requirements.</li>
                     </ul>
                 </div>
-    
                 <div style='border-top: 1px solid rgba(28, 29, 32, 0.1); padding-top: 30px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Business Impact</h4>
                     <div style='display: flex; gap: 20px; flex-wrap: wrap;'>
@@ -1363,12 +1492,13 @@
                 ">
                     <td>Healthcare Corp</td><td>London, UK</td><td>Zero Trust Architecture</td><td>2023</td>
                 </tr>
-                <tr class="hover-project" data-title="Automated Device Hardening" data-context="DevSecOps / IaC" data-image="https://images.unsplash.com/photo-1563206767-5b18f218e8de?q=80&w=800&auto=format&fit=crop" 
+
+                <!-- Project 3 -->
+                <tr class="hover-project archive-row" data-category="devsecops" data-title="Automated Device Hardening" data-context="DevSecOps / IaC" data-image="https://images.unsplash.com/photo-1563206767-5b18f218e8de?q=80&w=800&auto=format&fit=crop" 
                 data-desc="
                 <div style='margin-bottom: 30px;'>
                     <p style='font-size: 1.3rem; line-height: 1.5; color: rgba(28, 29, 32, 0.8);'><strong>Executive Summary:</strong> Engineered a robust DevSecOps pipeline to programmatically enforce CIS security benchmarks across a massive enterprise fleet, shifting from reactive patching to continuous, automated compliance.</p>
                 </div>
-                
                 <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;'>
                     <div style='padding: 25px; background-color: rgba(28, 29, 32, 0.03); border-left: 3px solid #1C1D20;'>
                         <h4 style='font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: rgba(28, 29, 32, 0.5);'>The Legacy Architecture</h4>
@@ -1379,7 +1509,6 @@
                         <p style='font-size: 1rem; font-family: monospace; color: #455CE9;'>Python • Ansible • Netmiko • Git • Jenkins</p>
                     </div>
                 </div>
-    
                 <div style='margin-bottom: 40px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Engineering Execution</h4>
                     <ul style='list-style-type: none; padding: 0;'>
@@ -1388,7 +1517,6 @@
                         <li style='margin-bottom: 10px; position: relative; padding-left: 20px;'><span style='position: absolute; left: 0; top: 0; color: #455CE9;'>■</span> <strong>Continuous Compliance:</strong> Integrated the automation framework into a Jenkins CI/CD pipeline for scheduled nightly drift-remediation runs.</li>
                     </ul>
                 </div>
-    
                 <div style='border-top: 1px solid rgba(28, 29, 32, 0.1); padding-top: 30px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Business Impact</h4>
                     <div style='display: flex; gap: 20px; flex-wrap: wrap;'>
@@ -1409,12 +1537,13 @@
                 ">
                     <td>E-Commerce Inc</td><td>Bangalore, IN</td><td>Automated Device Hardening</td><td>2023</td>
                 </tr>
-                <tr class="hover-project" data-title="Automated Firewall Review" data-context="Quarterly Automation" data-image="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop" 
+
+                <!-- Project 4 -->
+                <tr class="hover-project archive-row" data-category="devsecops" data-title="Automated Firewall Review" data-context="Quarterly Automation" data-image="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop" 
                 data-desc="
                 <div style='margin-bottom: 30px;'>
                     <p style='font-size: 1.3rem; line-height: 1.5; color: rgba(28, 29, 32, 0.8);'><strong>Executive Summary:</strong> Architected a continuous, Python-driven optimization engine that programmatically audits, deprecates, and cleanses enterprise firewall rulebases without human intervention.</p>
                 </div>
-                
                 <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;'>
                     <div style='padding: 25px; background-color: rgba(28, 29, 32, 0.03); border-left: 3px solid #1C1D20;'>
                         <h4 style='font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: rgba(28, 29, 32, 0.5);'>The Legacy Architecture</h4>
@@ -1425,7 +1554,6 @@
                         <p style='font-size: 1rem; font-family: monospace; color: #455CE9;'>Python • XML/REST API • Panorama • GitLab CI</p>
                     </div>
                 </div>
-    
                 <div style='margin-bottom: 40px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Engineering Execution</h4>
                     <ul style='list-style-type: none; padding: 0;'>
@@ -1434,7 +1562,6 @@
                         <li style='margin-bottom: 10px; position: relative; padding-left: 20px;'><span style='position: absolute; left: 0; top: 0; color: #455CE9;'>■</span> <strong>Orchestration:</strong> Integrated the script into a CI/CD pipeline, generating automated Git pull requests for security review before programmatically pushing policy commits.</li>
                     </ul>
                 </div>
-    
                 <div style='border-top: 1px solid rgba(28, 29, 32, 0.1); padding-top: 30px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Business Impact</h4>
                     <div style='display: flex; gap: 20px; flex-wrap: wrap;'>
@@ -1455,12 +1582,13 @@
                 ">
                     <td>Telecom Provider</td><td>Dubai, UAE</td><td>Firewall Optimization</td><td>2022</td>
                 </tr>
-                <tr class="hover-project" data-title="Infrastructure as Code" data-context="Automation" data-image="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=800&auto=format&fit=crop" 
+
+                <!-- Project 5 -->
+                <tr class="hover-project archive-row" data-category="devsecops" data-title="Infrastructure as Code" data-context="Automation" data-image="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=800&auto=format&fit=crop" 
                 data-desc="
                 <div style='margin-bottom: 30px;'>
                     <p style='font-size: 1.3rem; line-height: 1.5; color: rgba(28, 29, 32, 0.8);'><strong>Executive Summary:</strong> Led the paradigm shift from legacy manual provisioning to a modern, fully automated Infrastructure as Code (IaC) model, establishing a single source of truth for global network state.</p>
                 </div>
-                
                 <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;'>
                     <div style='padding: 25px; background-color: rgba(28, 29, 32, 0.03); border-left: 3px solid #1C1D20;'>
                         <h4 style='font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: rgba(28, 29, 32, 0.5);'>The Legacy Architecture</h4>
@@ -1471,7 +1599,6 @@
                         <p style='font-size: 1rem; font-family: monospace; color: #455CE9;'>Terraform • Python • REST APIs • CI/CD • NX-OS</p>
                     </div>
                 </div>
-    
                 <div style='margin-bottom: 40px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Engineering Execution</h4>
                     <ul style='list-style-type: none; padding: 0;'>
@@ -1480,7 +1607,6 @@
                         <li style='margin-bottom: 10px; position: relative; padding-left: 20px;'><span style='position: absolute; left: 0; top: 0; color: #455CE9;'>■</span> <strong>Workflow Enforcement:</strong> Mentored team members on Git workflows, enforcing peer reviews and automated syntax testing via pre-commit hooks.</li>
                     </ul>
                 </div>
-    
                 <div style='border-top: 1px solid rgba(28, 29, 32, 0.1); padding-top: 30px;'>
                     <h4 style='font-size: 1.2rem; font-weight: 600; margin-bottom: 15px;'>Business Impact</h4>
                     <div style='display: flex; gap: 20px; flex-wrap: wrap;'>
@@ -1504,7 +1630,6 @@
             </tbody>
         </table>
     </div>
-
     <!-- JOURNEY / EXPERIENCE DRILL-DOWN CANVAS -->
     <div class="journey-canvas" id="journey-canvas" data-lenis-prevent>
         <div class="journey-nav">
@@ -1814,6 +1939,43 @@
                     <li>Accessibility <span>8.9</span></li>
                     <li>Speed <span>9.5</span></li>
                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOSSIER / BLUEPRINT MODAL -->
+    <div class="archive-page" id="dossier-modal" data-lenis-prevent style="background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 999999;">
+        <div class="archive-nav" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <div class="brand-logo" style="position: static; color: var(--cyan-accent); z-index: 10; font-family: monospace; letter-spacing: 1px;">// The_Dossier</div>
+            <button class="archive-close hover-trigger" id="dossier-close-btn" style="color: #fff;">Close ✕</button>
+        </div>
+        
+        <div style="max-width: 1000px; margin: 15vh auto 5vh; padding: 0 5vw; text-align: center;">
+            <h1 style="font-size: clamp(3rem, 6vw, 5rem); font-weight: 400; letter-spacing: -2px; color: #fff; margin-bottom: 20px;">Download Center</h1>
+            <p style="font-size: 1.1rem; color: #a8b2d1; max-width: 600px; margin: 0 auto 10vh; line-height: 1.6;">Select the documentation you wish to review. The standard CV covers career chronology, while the Blueprint provides a high-level schematic of my global ZTNA deployments.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                
+                <!-- Standard CV Card -->
+                <a href="Musthalif_Meeran_Network_Engineer_CCNP_2026_.pdf" download="Musthalif_Meeran_Resume.pdf" class="hover-trigger" style="text-decoration: none; display: block; text-align: left;">
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 50px 35px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" onmouseover="this.style.borderColor='#00ffcc'; this.style.transform='translateY(-10px)'; this.style.background='rgba(0, 255, 204, 0.05)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.02)';">
+                        <div style="font-size: 3.5rem; margin-bottom: 25px;">📄</div>
+                        <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 15px; font-weight: 500; letter-spacing: -1px;">Standard CV</h3>
+                        <p style="color: #a8b2d1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 40px;">A comprehensive, detailed overview of my professional experience, core skills, and verified certifications.</p>
+                        <span style="color: #00ffcc; font-family: monospace; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Download PDF ➔</span>
+                    </div>
+                </a>
+
+                <!-- Architecture Blueprint Card -->
+                <a href="#" download="Musthalif_ZTNA_Blueprint.pdf" class="hover-trigger" style="text-decoration: none; display: block; text-align: left;">
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 50px 35px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" onmouseover="this.style.borderColor='#455CE9'; this.style.transform='translateY(-10px)'; this.style.background='rgba(69, 92, 233, 0.05)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.02)';">
+                        <div style="font-size: 3.5rem; margin-bottom: 25px;">🗺️</div>
+                        <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 15px; font-weight: 500; letter-spacing: -1px;">ZTNA Blueprint</h3>
+                        <p style="color: #a8b2d1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 40px;">A high-level architectural schematic demonstrating my implementation of a global Zero Trust perimeter.</p>
+                        <span style="color: #455CE9; font-family: monospace; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Download PDF ➔</span>
+                    </div>
+                </a>
+
             </div>
         </div>
     </div>
@@ -2203,8 +2365,7 @@
                     <h5>Socials</h5>
                     <div class="footer-socials">
                         <a class="awwwards-link hover-trigger" style="cursor:pointer;">Awwwards</a>
-                        <a href="Musthalif_Meeran_Network_Engineer_CCNP_2026_.pdf" download="Musthalif_Meeran_Resume.pdf" class="hover-trigger">Resume</a>
-                        <a href="https://www.linkedin.com/in/musthalif-meeran-61104b1b8/" target="_blank" rel="noopener noreferrer" class="hover-trigger">LinkedIn</a>
+<a class="dossier-trigger hover-trigger" style="cursor:pointer;">Resume</a>                        <a href="https://www.linkedin.com/in/musthalif-meeran-61104b1b8/" target="_blank" rel="noopener noreferrer" class="hover-trigger">LinkedIn</a>
                         <a href="https://github.com/Muchu97" target="_blank" rel="noopener noreferrer" class="hover-trigger">GitHub</a>
                     </div>
                 </div>
@@ -2963,6 +3124,189 @@ if (targetId === '#contact-page' || targetId === '#about-page' || targetId === '
             });
         });
 
+        // --------------------------------------------------------
+        // DOSSIER / BLUEPRINT MODAL LOGIC
+        // --------------------------------------------------------
+        const dossierModal = document.getElementById('dossier-modal');
+        const dossierCloseBtn = document.getElementById('dossier-close-btn');
+        const dossierTriggers = document.querySelectorAll('.dossier-trigger');
+
+        dossierTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                if(isMenuOpen) toggleMenu(); // Close side menu if it's open
+                
+                triggerTransition('Dossier', () => { 
+                    gsap.set(dossierModal, { top: 0 }); 
+                    dossierModal.scrollTop = 0; 
+                });
+            });
+        });
+
+        if (dossierCloseBtn) {
+            dossierCloseBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                triggerTransition('Home', () => { 
+                    gsap.set(dossierModal, { top: "100vh" }); 
+                });
+            });
+        }
+
+        // --------------------------------------------------------
+        // ARCHIVE PAGE: TECH STACK PILL FILTERING
+        // --------------------------------------------------------
+        const filterPills = document.querySelectorAll('.filter-pill');
+        const archiveRows = document.querySelectorAll('.archive-table tbody tr');
+
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                // 1. Swap active visual state
+                filterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                const filterValue = pill.getAttribute('data-filter');
+
+                // 2. Animate all rows fading down and out
+                gsap.to(archiveRows, {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.3,
+                    stagger: 0.05,
+                    onComplete: () => {
+                        // 3. Filter display logic
+                        archiveRows.forEach(row => {
+                            if (filterValue === 'all' || row.getAttribute('data-category') === filterValue) {
+                                row.style.display = 'table-row';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        });
+                        
+                        // 4. Animate the matching rows cascading back in
+                        const visibleRows = Array.from(archiveRows).filter(row => row.style.display === 'table-row');
+                        gsap.fromTo(visibleRows, 
+                            { opacity: 0, y: 20 }, 
+                            { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: "power2.out" }
+                        );
+                    }
+                });
+            });
+        });
+       // --------------------------------------------------------
+        // WHAT I DO: INTERACTIVE ZTNA SANDBOX ENGINE
+        // --------------------------------------------------------
+        const ztToggleBtn = document.getElementById('zt-toggle-btn');
+        const ztStatusText = document.getElementById('zt-status-text');
+        const ztStage = document.getElementById('zt-stage');
+        let isZtnaActive = false;
+        let ztSimulationInterval;
+
+        if (ztToggleBtn && ztStage) {
+            // Toggle Logic
+            ztToggleBtn.addEventListener('click', () => {
+                isZtnaActive = !isZtnaActive;
+                ztToggleBtn.classList.toggle('active');
+                
+                if (isZtnaActive) {
+                    ztStatusText.innerText = "Perimeter: SECURED";
+                    ztStatusText.style.color = "#daa520";
+                } else {
+                    ztStatusText.innerText = "Perimeter: VULNERABLE";
+                    ztStatusText.style.color = "rgba(255,255,255,0.6)";
+                }
+            });
+
+            // Packet Spawning Engine
+            function spawnPacket() {
+                // Determine if packet is authorized (green/gold) or malicious (red)
+                const isMalicious = Math.random() > 0.5;
+                
+                // Create packet DOM element
+                const packet = document.createElement('div');
+                packet.className = `zt-packet ${isMalicious ? 'packet-mal' : 'packet-auth'}`;
+                ztStage.appendChild(packet);
+
+                // Animation Phases
+                const tl = gsap.timeline({
+                    onComplete: () => { if(packet.parentNode) packet.remove(); }
+                });
+
+                // Phase 1: Enter from Public Web (10%) to Firewall (50%)
+                tl.fromTo(packet, 
+                    { left: "10%", opacity: 0, scale: 0.5 },
+                    { left: "50%", opacity: 1, scale: 1, duration: 1.2, ease: "none" }
+                );
+
+                // Phase 2: Decision at the Firewall
+                if (isMalicious && isZtnaActive) {
+                    // ZTNA blocks the malicious packet
+                    tl.add(() => {
+                        // Explosion effect
+                        const boom = document.createElement('div');
+                        boom.className = 'packet-explosion';
+                        boom.innerText = "BLOCKED";
+                        boom.style.left = "50%";
+                        boom.style.top = "20%"; // Pop above the firewall
+                        ztStage.appendChild(boom);
+                        
+                        gsap.to(boom, { y: -30, opacity: 0, scale: 1.5, duration: 0.8, onComplete: () => boom.remove() });
+                        
+                        // Flash the firewall red briefly to show impact
+                        const fwNode = document.querySelector('.node-fw');
+                        gsap.fromTo(fwNode, { borderColor: "#ff3333", boxShadow: "0 0 30px #ff3333" }, { borderColor: "#daa520", boxShadow: "0 0 30px rgba(218, 165, 32, 0.2)", duration: 0.5 });
+                    });
+                    
+                    // Shatter the packet
+                    tl.to(packet, { scale: 3, opacity: 0, duration: 0.2, ease: "expo.out" });
+                    
+                } else {
+                    // Packet passes through to Internal App (90%)
+                    tl.to(packet, { left: "90%", duration: 1.2, ease: "none" });
+                    // Fade out as it enters the app
+                    tl.to(packet, { opacity: 0, scale: 0, duration: 0.3 });
+                }
+            }
+
+            // Start the simulation loop (fires every 800ms)
+            ztSimulationInterval = setInterval(() => {
+                // Only spawn if the 'What I Do' page is actively open to save CPU
+                const whatPage = document.getElementById('what-i-do-page');
+                if (whatPage && whatPage.style.top === "0px") {
+                    spawnPacket();
+                }
+            }, 800);
+        }
+
+        // --------------------------------------------------------
+        // STEALTH MODE DOM INJECTION (BULLETPROOF)
+        // --------------------------------------------------------
+        const stealthBtn = document.getElementById('stealth-toggle-btn');
+        
+        if (stealthBtn) {
+            // Remove any old event listeners just in case
+            const newStealthBtn = stealthBtn.cloneNode(true);
+            stealthBtn.parentNode.replaceChild(newStealthBtn, stealthBtn);
+            
+            newStealthBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Toggle the matrix
+                document.body.classList.toggle('stealth-mode');
+                
+                // Optional: Glitch the transition text if it exists
+                const transitionText = document.getElementById('page-transition-text');
+                if (transitionText) {
+                    if (document.body.classList.contains('stealth-mode')) {
+                        transitionText.style.fontFamily = "monospace";
+                        transitionText.style.color = "#00ff41";
+                    } else {
+                        transitionText.style.fontFamily = "var(--font-main)";
+                        transitionText.style.color = "var(--text-light)";
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
