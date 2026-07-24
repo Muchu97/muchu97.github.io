@@ -80,19 +80,38 @@
         }
         .cursor.view-project::after { content: "Explore"; color: #00ffcc; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* PRELOADER */
-        .preloader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: var(--bg-dark); color: var(--text-light); z-index: 999999;
-            display: flex; justify-content: center; align-items: center;
-            font-size: clamp(2rem, 3.5vw, 4rem); font-weight: 400;
-        }
-        .preloader-text { display: flex; align-items: center; gap: 15px; opacity: 1; }
-        .preloader-text::before {
-            content: ''; display: block; width: 10px; height: 10px;
-            background-color: var(--text-light); border-radius: 50%;
-        }
+  /* --- THE GOD-TIER MASTER PRELOADER --- */
+        .preloader-master { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #050505; z-index: 999999; overflow: hidden; pointer-events: auto; font-family: 'Courier New', Courier, monospace; display: flex; justify-content: center; align-items: center; }
+        
+        /* Phase 1: Terminal */
+        #terminal-phase { width: 100%; height: 100%; padding: 5vw; display: flex; flex-direction: column; justify-content: flex-end; color: #00ff41; font-size: clamp(0.85rem, 1.5vw, 1.2rem); line-height: 1.5; }
+        .boot-line { opacity: 0; margin-bottom: 5px; text-shadow: 0 0 8px rgba(0, 255, 65, 0.4); }
+        .boot-line.visible { opacity: 1; }
+        .boot-cursor { display: inline-block; width: 10px; height: 1.2em; background-color: #00ff41; vertical-align: bottom; animation: blink 1s step-end infinite; margin-left: 8px; box-shadow: 0 0 10px #00ff41; }
+        @keyframes blink { 50% { opacity: 0; } }
 
+        /* Phase 2: Enclave & Decryption */
+        #enclave-phase { position: absolute; width: 100%; height: 100%; top: 0; left: 0; display: none; opacity: 0; }
+        .grid-layer { position: absolute; width: 100%; height: 100%; background-image: linear-gradient(rgba(0, 255, 204, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 204, 0.1) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.3; }
+        .spotlight-mask { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, #050505 100%); z-index: 3; pointer-events: none; transition: background 0.1s; }
+        .glass-enclave { position: absolute; width: 100%; height: 100%; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 2; }
+        .particle-flow { position: absolute; width: 100%; height: 100%; z-index: 4; pointer-events: none; }
+        .data-packet { position: absolute; height: 2px; background: #00ffcc; box-shadow: 0 0 10px #00ffcc; border-radius: 50%; opacity: 0.7; }
+        .interface-layer { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 5; pointer-events: none; }
+        .kinetic-text { font-size: clamp(2rem, 6vw, 6rem); font-weight: 700; color: #fff; letter-spacing: -2px; margin-bottom: 30px; text-shadow: 0 0 20px rgba(255,255,255,0.3); opacity: 0.8; mix-blend-mode: overlay; text-align: center; font-family: 'Courier New', Courier, monospace; }
+        .tls-container { width: 300px; text-align: center; }
+        .tls-label { color: rgba(255,255,255,0.6); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .tls-track { width: 100%; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; position: relative; }
+        .tls-bar { height: 100%; width: 0%; background: #fff; box-shadow: 0 0 10px #fff; }
+        .laser-sweep { position: absolute; top: -10px; left: 0; width: 100%; height: 4px; background: #00ffcc; box-shadow: 0 0 20px 10px rgba(0, 255, 204, 0.5); opacity: 0; z-index: 6; }
+
+        /* Phase 3: Greetings */
+        #greeting-phase { position: absolute; width: 100%; height: 100%; top: 0; left: 0; display: none; opacity: 0; justify-content: center; align-items: center; z-index: 7; background-color: var(--bg-dark); }
+        .greeting-text { color: var(--text-light); font-family: var(--font-main); font-size: clamp(2rem, 4vw, 4rem); font-weight: 400; display: flex; align-items: center; gap: 15px; }
+        .greeting-text::before { content: ''; display: block; width: 12px; height: 12px; background-color: var(--text-light); border-radius: 50%; }
+
+        /* Phase 4: Iris Wipe */
+        .iris-wipe { position: absolute; top: 50%; left: 50%; width: 100vw; height: 100vw; background: transparent; border-radius: 50%; transform: translate(-50%, -50%) scale(0); box-shadow: 0 0 0 100vw transparent; z-index: 10; pointer-events: none; }
         /* PAGE TRANSITION OVERLAY */
         .page-transition {
             position: fixed; top: 100vh; left: 0; width: 100vw; height: 100vh;
@@ -864,11 +883,44 @@
     </style>
 </head>
 <body>
-    <!-- PRELOADER -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-text" id="preloader-text">Hello</div>
-    </div>
 
+    
+<!-- THE GOD-TIER CINEMATIC MASTER PRELOADER -->
+    <div class="preloader-master" id="preloader-master">
+        
+        <!-- Phase 1: Terminal Boot -->
+        <div id="terminal-phase">
+            <div id="boot-text-container"></div>
+            <div style="display: flex; align-items: center; margin-top: 5px;">
+                <span id="boot-current-line"></span><span class="boot-cursor active" id="boot-cursor"></span>
+            </div>
+        </div>
+
+        <!-- Phase 2: Schematic/Enclave & Decryption -->
+        <div id="enclave-phase">
+            <div class="grid-layer"></div>
+            <div class="spotlight-mask" id="spotlight-mask"></div>
+            <div class="glass-enclave"></div>
+            <div class="particle-flow" id="particle-flow"></div>
+            
+            <div class="interface-layer">
+                <h1 class="kinetic-text" id="kinetic-text">X7#k9@q!</h1>
+                <div class="tls-container" id="tls-container">
+                    <div class="tls-label" id="tls-label">Negotiating TLS 1.3 Handshake...</div>
+                    <div class="tls-track"><div class="tls-bar" id="tls-bar"></div></div>
+                </div>
+                <div class="laser-sweep" id="laser-sweep"></div>
+            </div>
+        </div>
+
+        <!-- Phase 3: Global Greeting Loop -->
+        <div id="greeting-phase">
+            <div class="greeting-text" id="greeting-text">Hello</div>
+        </div>
+
+        <!-- Phase 4: The Zero-Trust Iris Wipe Mask -->
+        <div class="iris-wipe" id="iris-wipe"></div>
+    </div>
     <!-- CURSOR -->
     <div class="cursor"></div>
 
@@ -885,13 +937,6 @@
     <div class="menu-overlay" id="menu-overlay">
         <div class="menu-inner">
             
-           <!-- 15. STEALTH MODE TOGGLE -->
-            <div class="stealth-toggle-container" style="position: relative; z-index: 999999; pointer-events: auto;">
-                <span class="stealth-label">Initialize_Stealth</span>
-                <div class="stealth-switch hover-trigger" id="stealth-toggle-btn">
-                    <div class="stealth-slider" style="pointer-events: none;"></div>
-                </div>
-            </div>
 
             <div class="menu-header">Navigation</div>
            <!-- 15. STEALTH MODE TOGGLE (NATIVE HTML FIX) -->
@@ -2421,38 +2466,177 @@
             lenis.raf(time * 1000);
         });
         gsap.ticker.lagSmoothing(0, 0);
+// --------------------------------------------------------
+        // GOD-TIER 4-STAGE PRELOADER SEQUENCE
+        // --------------------------------------------------------
+        function startGodTierLoader() {
+            const preloader = document.getElementById('preloader-master');
+            if (!preloader) return;
 
-        // 1. PRELOADER LOGIC
-        function startLoader() {
-            const greetings = ["Hello", "Bonjour", "Hola", "Ciao", "Namaste", "Guten tag", "こんにちは"];
-            const loaderText = document.getElementById('preloader-text'); 
-            const preloader = document.getElementById('preloader');
+            // Phase Elements
+            const termPhase = document.getElementById('terminal-phase');
+            const enclavePhase = document.getElementById('enclave-phase');
+            const greetingPhase = document.getElementById('greeting-phase');
             
-            if (!loaderText || !preloader) return;
+            // Sub-Elements
+            const bootContainer = document.getElementById('boot-text-container');
+            const currentLineEl = document.getElementById('boot-current-line');
+            const cursor = document.getElementById('boot-cursor');
+            
+            const kineticText = document.getElementById('kinetic-text');
+            const tlsBar = document.getElementById('tls-bar');
+            const tlsLabel = document.getElementById('tls-label');
+            const spotlight = document.getElementById('spotlight-mask');
+            const laser = document.getElementById('laser-sweep');
+            const iris = document.getElementById('iris-wipe');
+            const particleContainer = document.getElementById('particle-flow');
+            const greetingTextEl = document.getElementById('greeting-text');
 
-            let counter = 0;
-            const interval = setInterval(() => {
-                counter++;
-                if (counter < greetings.length) {
-                    loaderText.innerText = greetings[counter];
+            // --- PHASE 1: TERMINAL BOOT ---
+            const bootSequence = [
+                "System Bootstrap, Version 15.1(4)M2, RELEASE SOFTWARE (fc1)",
+                "Copyright (c) 1986-2026 by Warden of the Realm",
+                "Compiled Fri 24-Jul-26 01:05 by root_architect",
+                "Loading OS Image... [100%]",
+                "Decompressing Kernel... OK",
+                "Establishing AES-256 IPsec Tunnels... SUCCESS",
+                "Enforcing Zero Trust Architecture... DONE",
+                "Initiating UI Protocol..."
+            ];
+
+            let lineIndex = 0;
+            
+            function printLine() {
+                if (lineIndex < bootSequence.length) {
+                    if (lineIndex > 0) {
+                        const pastLine = document.createElement('div');
+                        pastLine.className = 'boot-line visible';
+                        pastLine.innerText = bootSequence[lineIndex - 1];
+                        bootContainer.appendChild(pastLine);
+                    }
+                    currentLineEl.innerText = bootSequence[lineIndex];
+                    lineIndex++;
+                    setTimeout(printLine, Math.random() * 100 + 40); 
                 } else {
-                    clearInterval(interval);
-                    gsap.to(preloader, {
-                        yPercent: -100, duration: 1.2, ease: "power4.inOut", delay: 0.3,
-                        onComplete: () => { document.body.style.overflow = 'auto'; }
-                    });
+                    const finalLine = document.createElement('div');
+                    finalLine.className = 'boot-line visible';
+                    finalLine.innerText = bootSequence[lineIndex - 1];
+                    bootContainer.appendChild(finalLine);
+                    currentLineEl.innerText = "";
+                    cursor.style.display = "none";
+                    
+                    // Transition to Enclave
+                    setTimeout(startEnclavePhase, 300); 
                 }
-            }, 250);
+            }
+
+            // --- PHASE 2: SCHEMATIC ENCLAVE & DECRYPTION ---
+            let particleInterval, scrambleInterval;
+            
+            function startEnclavePhase() {
+                termPhase.style.display = 'none';
+                enclavePhase.style.display = 'block';
+                gsap.to(enclavePhase, { opacity: 1, duration: 0.5 });
+
+                // Spotlight Interaction
+                preloader.addEventListener('mousemove', (e) => {
+                    spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+                    spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+                });
+
+                // Particles
+                particleInterval = setInterval(() => {
+                    const packet = document.createElement('div');
+                    packet.className = 'data-packet';
+                    packet.style.top = `${Math.random() * 100}%`;
+                    packet.style.left = `-5%`;
+                    packet.style.width = `${Math.random() * 40 + 10}px`;
+                    particleContainer.appendChild(packet);
+                    gsap.to(packet, { left: "105%", duration: Math.random() * 1.5 + 0.5, ease: "none", onComplete: () => packet.remove() });
+                }, 100);
+
+                // Scrambler
+                const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+                scrambleInterval = setInterval(() => {
+                    let randomString = "";
+                    for(let i=0; i<14; i++) randomString += chars.charAt(Math.floor(Math.random() * chars.length));
+                    kineticText.innerText = randomString;
+                }, 60);
+
+                // Master Enclave Timeline
+                const tl = gsap.timeline();
+                tl.to(tlsBar, { width: "100%", duration: 1.5, ease: "power2.inOut" }, 0.2);
+                
+                tl.add(() => {
+                    clearInterval(scrambleInterval);
+                    clearInterval(particleInterval);
+                    kineticText.style.fontFamily = "var(--font-main)";
+                    kineticText.innerText = "ACCESS GRANTED";
+                    kineticText.style.color = "#00ffcc";
+                    kineticText.style.mixBlendMode = "normal";
+                    tlsLabel.innerText = "Perimeter Secured.";
+                    tlsLabel.style.color = "#00ffcc";
+                    tlsBar.style.backgroundColor = "#00ffcc";
+                    tlsBar.style.boxShadow = "0 0 15px #00ffcc";
+                    particleContainer.innerHTML = '';
+                }, 1.7);
+
+                tl.to(laser, { opacity: 1, duration: 0.1 }, 1.8);
+                tl.to(laser, { top: "100%", duration: 0.5, ease: "power2.in" }, 1.9);
+                tl.to(laser, { opacity: 0, duration: 0.1 }, 2.4);
+
+                // Transition to Greetings
+                tl.to(enclavePhase, { opacity: 0, duration: 0.4 }, 2.6);
+                tl.add(startGreetingPhase, 2.8);
+            }
+
+            // --- PHASE 3: GLOBAL GREETING LOOP ---
+            function startGreetingPhase() {
+                enclavePhase.style.display = 'none';
+                greetingPhase.style.display = 'flex';
+                gsap.to(greetingPhase, { opacity: 1, duration: 0.4 });
+
+                const greetings = ["Hello", "Bonjour", "Hola", "Ciao", "Namaste", "Guten tag", "こんにちは"];
+                let gIndex = 0;
+                
+                const gInterval = setInterval(() => {
+                    gIndex++;
+                    if (gIndex < greetings.length) { 
+                        greetingTextEl.innerText = greetings[gIndex]; 
+                    } else {
+                        clearInterval(gInterval);
+                        startIrisWipe();
+                    }
+                }, 220); 
+            }
+
+            // --- PHASE 4: ZERO-TRUST IRIS WIPE ---
+            function startIrisWipe() {
+                gsap.to(greetingPhase, { scale: 0, opacity: 0, duration: 0.4, ease: "back.in(2)" });
+                
+                gsap.to(iris, { 
+                    boxShadow: "0 0 0 0px #1C1D20 inset", 
+                    scale: 3.5, 
+                    duration: 1.2, 
+                    ease: "expo.inOut",
+                    onStart: () => { 
+                        preloader.style.backgroundColor = "transparent"; 
+                    },
+                    onComplete: () => {
+                        preloader.style.pointerEvents = "none";
+                        gsap.set(preloader, { display: "none" });
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+
+            // Initialize the entire sequence
+            setTimeout(printLine, 200);
         }
 
-        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', startLoader); } 
-        else { startLoader(); }
-
-        const resizeObserver = new ResizeObserver(() => { requestAnimationFrame(() => lenis.resize()); });
-        resizeObserver.observe(document.body);
-
-        // 2. CURSOR & HOVER REVEAL LOGIC
-        const cursor = document.querySelector('.cursor');
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', startGodTierLoader); } else { startGodTierLoader(); }
+        
+                const cursor = document.querySelector('.cursor');
         const triggers = document.querySelectorAll('.hover-trigger');
         const projectTriggers = document.querySelectorAll('.hover-project');
         
